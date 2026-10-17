@@ -1,0 +1,795 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Home | Eagles Academy Aso Pada</title>
+
+  <!-- Favicon -->
+  <link rel="shortcut icon" href="assets/img/eimgg.jpg" type="image/x-icon">
+
+  <!-- Bootstrap 5 CSS -->
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
+  <!-- Font Awesome 6 Icons -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css">
+  <!-- Google Fonts -->
+  <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+  <!-- AOS Animation Library -->
+  <link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet">
+
+  <style>
+    :root {
+      --primary-color: #1E5631; /* School Primary Green */
+      --secondary-color: #D9534F; /* Crimson Accent */
+      --accent-color: #F4B41A; /* Academic Gold */
+      --dark-text: #2B2D42;
+      --light-bg: #F8F9FA;
+    }
+
+    body {
+      font-family: 'Plus Jakarta Sans', sans-serif;
+      color: var(--dark-text);
+      overflow-x: hidden;
+      background-color: #FCFDFD;
+    }
+
+    /* Top Navigation Bar */
+    .top-bar {
+      background-color: var(--primary-color);
+      color: #ffffff;
+      font-size: 0.875rem;
+      padding: 8px 0;
+    }
+
+    .navbar {
+      box-shadow: 0 4px 15px rgba(0,0,0,0.05);
+      background: #ffffff;
+      padding: 12px 0;
+      transition: all 0.3s ease;
+    }
+    
+    .navbar.scrolled {
+      padding: 8px 0;
+      box-shadow: 0 6px 20px rgba(0,0,0,0.1);
+    }
+
+    .brand-title {
+      font-weight: 800;
+      color: var(--primary-color);
+      line-height: 1.1;
+      font-size: 1.15rem;
+    }
+    .brand-sub {
+      color: var(--secondary-color);
+      font-size: 0.8rem;
+      letter-spacing: 1px;
+    }
+
+    /* 1. Hero Carousel Styling */
+    #heroCarousel {
+      position: relative;
+      min-height: 85vh;
+    }
+    #heroCarousel .carousel-item {
+      height: 85vh;
+      min-height: 550px;
+      background-size: cover;
+      background-position: center;
+      background-repeat: no-repeat;
+      transition: transform 1.2s ease-in-out, opacity 1s ease-in-out;
+    }
+    .carousel-caption {
+      position: relative;
+      right: 0;
+      left: 0;
+      bottom: 0;
+      padding-bottom: 0;
+    }
+    .carousel-item.active .animated-caption h1 {
+      animation: fadeInUp 0.8s ease forwards 0.2s;
+      opacity: 0;
+    }
+    .carousel-item.active .animated-caption p {
+      animation: fadeInUp 0.8s ease forwards 0.4s;
+      opacity: 0;
+    }
+    .carousel-item.active .animated-caption .badge,
+    .carousel-item.active .animated-caption .btn {
+      animation: fadeInUp 0.8s ease forwards 0.6s;
+      opacity: 0;
+    }
+    @keyframes fadeInUp {
+      from { opacity: 0; transform: translateY(30px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+    .carousel-indicators [data-bs-target] {
+      width: 12px;
+      height: 12px;
+      border-radius: 50%;
+      background-color: #ffffff;
+      opacity: 0.5;
+      margin: 0 6px;
+      border: none;
+    }
+    .carousel-indicators .active {
+      opacity: 1;
+      background-color: var(--accent-color);
+      width: 32px;
+      border-radius: 10px;
+      transition: all 0.3s ease;
+    }
+
+    /* 2. Management & Leadership Section */
+    .mgmt-card {
+      background: #ffffff;
+      border-radius: 16px;
+      overflow: hidden;
+      box-shadow: 0 10px 25px rgba(0,0,0,0.05);
+      transition: all 0.4s ease;
+      border: 1px solid #EFEFEF;
+    }
+    .mgmt-card:hover {
+      transform: translateY(-10px);
+      box-shadow: 0 15px 35px rgba(30, 86, 49, 0.15);
+      border-color: var(--primary-color);
+    }
+    .mgmt-img-box {
+      overflow: hidden;
+      height: 240px;
+      position: relative;
+    }
+    .mgmt-img-box img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      transition: transform 0.5s ease;
+    }
+    .mgmt-card:hover .mgmt-img-box img {
+      transform: scale(1.08);
+    }
+
+    /* 3. Student Showcase Slideshow */
+    .student-writing-section {
+      background: linear-gradient(135deg, #1E5631 0%, #0F2D19 100%);
+      color: #ffffff;
+      border-radius: 24px;
+      padding: 60px 40px;
+      box-shadow: 0 15px 35px rgba(0,0,0,0.2);
+    }
+    .writing-slide {
+      min-height: 220px;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+      text-align: center;
+    }
+    .student-quote {
+      font-size: 1.25rem;
+      font-style: italic;
+      line-height: 1.8;
+      max-width: 800px;
+      margin: 0 auto 20px;
+    }
+    .student-meta {
+      color: var(--accent-color);
+      font-weight: 700;
+      letter-spacing: 0.5px;
+    }
+
+    /* 4. Co-Curricular Slideshow */
+    .cocurricular-item {
+      height: 420px;
+      border-radius: 20px;
+      background-size: cover;
+      background-position: center;
+      position: relative;
+      overflow: hidden;
+    }
+    .cocurricular-overlay {
+      position: absolute;
+      inset: 0;
+      background: linear-gradient(to top, rgba(0,0,0,0.85) 0%, rgba(0,0,0,0.1) 60%);
+      display: flex;
+      align-items: flex-end;
+      padding: 30px;
+      color: #ffffff;
+    }
+
+    /* 5. Facts & Pillars Section */
+    .facts-box {
+      background: #ffffff;
+      border-left: 6px solid var(--accent-color);
+      border-radius: 16px;
+      padding: 35px;
+      box-shadow: 0 10px 30px rgba(0,0,0,0.04);
+    }
+    .feature-card {
+      background: #ffffff;
+      border-radius: 16px;
+      padding: 30px;
+      box-shadow: 0 8px 20px rgba(0,0,0,0.03);
+      height: 100%;
+      border: 1px solid #EFEFEF;
+      transition: transform 0.3s ease;
+    }
+    .feature-card:hover {
+      transform: translateY(-5px);
+      border-color: var(--primary-color);
+    }
+    .feature-icon {
+      width: 60px;
+      height: 60px;
+      background: rgba(30, 86, 49, 0.1);
+      color: var(--primary-color);
+      border-radius: 14px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 1.6rem;
+      margin-bottom: 20px;
+    }
+
+    /* Footer */
+    footer {
+      background: #111;
+      color: #bbb;
+      padding-top: 60px;
+      padding-bottom: 30px;
+    }
+    footer h5 { color: #fff; font-weight: 700; margin-bottom: 20px; }
+    footer a { color: #bbb; text-decoration: none; }
+    footer a:hover { color: #fff; }
+  </style>
+</head>
+<body>
+
+  <!-- Top Bar -->
+  <div class="top-bar d-none d-md-block">
+    <div class="container d-flex justify-content-between align-items-center">
+      <div>
+        <i class="fa-solid fa-envelope me-2"></i> eaglesacademy1@gmail.com
+        <span class="mx-3">|</span>
+        <i class="fa-solid fa-phone me-2"></i> +234 807 616 6900, +234 814 022 9663
+      </div>
+      <div>
+        <i class="fa-solid fa-location-dot me-2"></i> Aso Pada, Mararaba, Nasarawa State
+      </div>
+    </div>
+  </div>
+
+  <!-- Navbar -->
+  <nav class="navbar navbar-expand-lg sticky-top" id="mainNavbar">
+    <div class="container">
+      <a class="navbar-brand d-flex align-items-center" href="index.html">
+        <img src="assets/img/eimgg.jpg" alt="Logo" height="48" class="me-2 rounded-circle">
+        <div>
+          <div class="brand-title">EAGLES ACADEMY</div>
+          <div class="brand-sub">ASO PADA</div>
+        </div>
+      </a>
+      <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#mainNav">
+        <span class="navbar-toggler-icon"></span>
+      </button>
+      <div class="collapse navbar-collapse" id="mainNav">
+        <ul class="navbar-nav ms-auto fw-semibold">
+          <li class="nav-item"><a class="nav-link active" href="index.html">HOME</a></li>
+          <li class="nav-item"><a class="nav-link" href="about.html">ABOUT US</a></li>
+          <li class="nav-item"><a class="nav-link" href="student-activities.html">STUDENT ACTIVITIES</a></li>
+          <li class="nav-item"><a class="nav-link" href="gallery.html">GALLERY</a></li>
+          <li class="nav-item"><a class="nav-link" href="contact.html">CONTACT</a></li>
+        </ul>
+      </div>
+    </div>
+  </nav>
+
+  <!-- 1. Hero Carousel Section -->
+  <section id="heroCarousel" class="carousel slide carousel-fade">
+    <div class="carousel-indicators">
+      <button type="button" data-bs-target="#heroCarousel" data-bs-slide-to="0" class="active" aria-current="true"></button>
+      <button type="button" data-bs-target="#heroCarousel" data-bs-slide-to="1"></button>
+      <button type="button" data-bs-target="#heroCarousel" data-bs-slide-to="2"></button>
+      <button type="button" data-bs-target="#heroCarousel" data-bs-slide-to="3"></button>
+      <button type="button" data-bs-target="#heroCarousel" data-bs-slide-to="4"></button>
+    </div>
+
+    <div class="carousel-inner">
+      <!-- Slide 1 -->
+      <div class="carousel-item active" style="background-image: linear-gradient(rgba(15, 45, 25, 0.82), rgba(15, 45, 25, 0.82)), url('assets/img/64.jpg');">
+        <div class="container h-100 d-flex align-items-center">
+          <div class="carousel-caption text-start animated-caption">
+            <span class="badge bg-warning text-dark px-3 py-2 rounded-pill fs-6 fw-bold mb-3">WELCOME TO EAGLES ACADEMY</span>
+            <h1 class="display-3 fw-extrabold text-white mb-3">Raising Future Giants Through Quality Education</h1>
+            <p class="lead text-light mb-4 col-lg-9">Creating analytical minds through modern education and equipping students for international participation in all human endeavors.</p>
+            <div class="d-flex flex-wrap gap-3">
+              <a href="about.html" class="btn btn-success btn-lg rounded-pill px-4 py-3 fw-bold shadow">Discover Our School</a>
+              <a href="enroll.html" class="btn btn-outline-light btn-lg rounded-pill px-4 py-3 fw-bold">Enroll Your Child</a>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Slide 2 -->
+      <div class="carousel-item" style="background-image: linear-gradient(rgba(15, 45, 25, 0.82), rgba(15, 45, 25, 0.82)), url('assets/img/61.jpg');">
+        <div class="container h-100 d-flex align-items-center">
+          <div class="carousel-caption text-start animated-caption">
+            <span class="badge bg-danger px-3 py-2 rounded-pill fs-6 fw-bold mb-3">INNOVATION & STEM</span>
+            <h1 class="display-3 fw-extrabold text-white mb-3">Empowering Minds with Modern Learning</h1>
+            <p class="lead text-light mb-4 col-lg-9">Equipped with ultra-modern computer suites and science laboratories to foster practical learning and technological fluency.</p>
+            <div class="d-flex flex-wrap gap-3">
+              <a href="about.html" class="btn btn-success btn-lg rounded-pill px-4 py-3 fw-bold shadow">Explore Academics</a>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Slide 3 -->
+      <div class="carousel-item" style="background-image: linear-gradient(rgba(15, 45, 25, 0.82), rgba(15, 45, 25, 0.82)), url('assets/img/62.jpg');">
+        <div class="container h-100 d-flex align-items-center">
+          <div class="carousel-caption text-start animated-caption">
+            <span class="badge bg-warning text-dark px-3 py-2 rounded-pill fs-6 fw-bold mb-3">CHARACTER & INTEGRITY</span>
+            <h1 class="display-3 fw-extrabold text-white mb-3">Instilling Godly Values & Leadership</h1>
+            <p class="lead text-light mb-4 col-lg-9">We place high priority on character building, sound discipline, and ethical values for responsible global leadership.</p>
+            <div class="d-flex flex-wrap gap-3">
+              <a href="about.html#proprietress" class="btn btn-success btn-lg rounded-pill px-4 py-3 fw-bold shadow">Read Address</a>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Slide 4 -->
+      <div class="carousel-item" style="background-image: linear-gradient(rgba(15, 45, 25, 0.82), rgba(15, 45, 25, 0.82)), url('assets/img/yam.jpeg');">
+        <div class="container h-100 d-flex align-items-center">
+          <div class="carousel-caption text-start animated-caption">
+            <span class="badge bg-info text-dark px-3 py-2 rounded-pill fs-6 fw-bold mb-3">FOUNDATIONAL LEARNING</span>
+            <h1 class="display-3 fw-extrabold text-white mb-3">Nurturing Young Learners with Care</h1>
+            <p class="lead text-light mb-4 col-lg-9">Learner-centered methodologies that ignite curiosity, creativity, and self-confidence right from the early stages.</p>
+            <div class="d-flex flex-wrap gap-3">
+              <a href="contact.html" class="btn btn-success btn-lg rounded-pill px-4 py-3 fw-bold shadow">Admissions Info</a>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Slide 5 -->
+      <div class="carousel-item" style="background-image: linear-gradient(rgba(15, 45, 25, 0.82), rgba(15, 45, 25, 0.82)), url('assets/img/6.jpg');">
+        <div class="container h-100 d-flex align-items-center">
+          <div class="carousel-caption text-start animated-caption">
+            <span class="badge bg-success px-3 py-2 rounded-pill fs-6 fw-bold mb-3">HOLISTIC DEVELOPMENT</span>
+            <h1 class="display-3 fw-extrabold text-white mb-3">Unlocking Talents Beyond Classrooms</h1>
+            <p class="lead text-light mb-4 col-lg-9">From sports to debating clubs and creative writing, we build well-rounded individuals ready to excel anywhere.</p>
+            <div class="d-flex flex-wrap gap-3">
+              <a href="student-activities.html" class="btn btn-success btn-lg rounded-pill px-4 py-3 fw-bold shadow">Student Activities</a>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <button class="carousel-control-prev" type="button" data-bs-target="#heroCarousel" data-bs-slide="prev">
+      <span class="carousel-control-prev-icon p-3 rounded-circle bg-dark bg-opacity-50"></span>
+    </button>
+    <button class="carousel-control-next" type="button" data-bs-target="#heroCarousel" data-bs-slide="next">
+      <span class="carousel-control-next-icon p-3 rounded-circle bg-dark bg-opacity-50"></span>
+    </button>
+  </section>
+
+  <!-- 2. School Management Section (7 Member Cards) -->
+  <section class="py-5 bg-light">
+    <div class="container">
+      <div class="text-center mb-5" data-aos="fade-up">
+        <span class="badge bg-success px-3 py-2 rounded-pill fw-bold">LEADERSHIP</span>
+        <h2 class="fw-bold text-success mt-2">Our School Management & Executives</h2>
+        <p class="text-muted">Dedicated professionals driving academic excellence and administrative leadership.</p>
+      </div>
+
+      <div class="row g-4 justify-content-center">
+        <!-- Executive 1 -->
+        <div class="col-6 col-md-4 col-lg-3" data-aos="fade-up" data-aos-delay="100">
+          <div class="mgmt-card text-center">
+            <div class="mgmt-img-box"><img src="assets/img/70.jpg" alt="Management Member 1"></div>
+            <div class="p-3">
+              <h6 class="fw-bold mb-1 text-dark">Dr. Alex A. Maiyanga MNI</h6>
+              <p class="text-muted small mb-0">Director/ CEO</p>
+            </div>
+          </div>
+        </div>
+        <!-- Executive 2 -->
+        <div class="col-6 col-md-4 col-lg-3" data-aos="fade-up" data-aos-delay="150">
+          <div class="mgmt-card text-center">
+            <div class="mgmt-img-box"><img src="assets/img/14.jpg" alt="Management Member 2"></div>
+            <div class="p-3">
+              <h6 class="fw-bold mb-1 text-dark">Mrs. Victoria Jumeyi Maiyanga</h6>
+              <p class="text-muted small mb-0">Proprietress</p>
+            </div>
+          </div>
+        </div>
+        <!-- Executive 3 -->
+        <div class="col-6 col-md-4 col-lg-3" data-aos="fade-up" data-aos-delay="200">
+          <div class="mgmt-card text-center">
+            <div class="mgmt-img-box"><img src="assets/img/headteacher.jpeg" alt="Management Member 3"></div>
+            <div class="p-3">
+              <h6 class="fw-bold mb-1 text-dark">Mrs. Moses Patience Ako</h6>
+              <p class="text-muted small mb-0">Head Facilitator</p>
+            </div>
+          </div>
+        </div>
+        <!-- Executive 4 -->
+        <div class="col-6 col-md-4 col-lg-3" data-aos="fade-up" data-aos-delay="250">
+          <div class="mgmt-card text-center">
+            <div class="mgmt-img-box"><img src="assets/img/man1.jpg" alt="Management Member 4"></div>
+            <div class="p-3">
+              <h6 class="fw-bold mb-1 text-dark">Mr. Ameh Emma</h6>
+              <p class="text-muted small mb-0">Assistant Head Facilitator</p>
+            </div>
+          </div>
+        </div>
+        <!-- Executive 5 -->
+        <div class="col-6 col-md-4 col-lg-3" data-aos="fade-up" data-aos-delay="300">
+          <div class="mgmt-card text-center">
+            <div class="mgmt-img-box"><img src="assets/img/man4.jpg" alt="Management Member 5"></div>
+            <div class="p-3">
+              <h6 class="fw-bold mb-1 text-dark">Mrs. Ozoilo Nikruka Vera</h6>
+              <p class="text-muted small mb-0">Head Of Nursery Section</p>
+            </div>
+          </div>
+        </div>
+        <!-- Executive 6 -->
+        <div class="col-6 col-md-4 col-lg-3" data-aos="fade-up" data-aos-delay="350">
+          <div class="mgmt-card text-center">
+            <div class="mgmt-img-box"><img src="assets/img/man2.jpg" alt="Management Member 6"></div>
+            <div class="p-3">
+              <h6 class="fw-bold mb-1 text-dark">Mrs. Ebere Wilson</h6>
+              <p class="text-muted small mb-0">Head of Grade Section</p>
+            </div>
+          </div>
+        </div>
+        <!-- Executive 7 -->
+        <div class="col-6 col-md-4 col-lg-3" data-aos="fade-up" data-aos-delay="400">
+          <div class="mgmt-card text-center">
+            <div class="mgmt-img-box"><img src="assets/img/sec.jpeg" alt="Management Member 7"></div>
+            <div class="p-3">
+              <h6 class="fw-bold mb-1 text-dark">Mrs. Amos Peace</h6>
+              <p class="text-muted small mb-0">Secretary</p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- 3. Student Showcase Section (Text-Only Slideshow for 5 Students) -->
+  <section class="py-5">
+    <div class="container">
+      <div class="student-writing-section" data-aos="zoom-in">
+        <div class="text-center mb-4">
+          <span class="badge bg-warning text-dark px-3 py-2 rounded-pill fw-bold">STUDENT EXPRESS</span>
+          <h3 class="fw-bold mt-2 text-white">Voices of Eagles Academy</h3>
+        </div>
+
+        <div id="studentTextCarousel" class="carousel slide">
+          <div class="carousel-inner">
+
+            <!-- Student 1 -->
+            <div class="carousel-item active">
+              <div class="writing-slide">
+                <i class="fa-solid fa-quote-left fs-1 text-warning opacity-50 mb-3"></i>
+                <p class="student-quote">"Learners are friendly, learner are neat, learner are punctual and learner are obedient"</p>
+                <div class="student-meta">— Daniel Irunoagbe (JSS 1)</div>
+              </div>
+            </div>
+
+            <!-- Student 2 -->
+            <div class="carousel-item">
+              <div class="writing-slide">
+                <i class="fa-solid fa-quote-left fs-1 text-warning opacity-50 mb-3"></i>
+                <p class="student-quote">"Do not judge by success, judge me by how many time i fall down and got back up again"</p>
+                <div class="student-meta">— Obed Bala (SSS 2)</div>
+              </div>
+            </div>
+
+            <!-- Student 3 -->
+            <div class="carousel-item">
+              <div class="writing-slide">
+                <i class="fa-solid fa-quote-left fs-1 text-warning opacity-50 mb-3"></i>
+                <p class="student-quote">"Reading is key to the future success. Good reading skills can equip children with the necessary skills to succeed in the later life."</p>
+                <div class="student-meta">— Divine Joy (Grade 5)</div>
+              </div>
+            </div>
+
+            <!-- Student 4 -->
+            <div class="carousel-item">
+              <div class="writing-slide">
+                <i class="fa-solid fa-quote-left fs-1 text-warning opacity-50 mb-3"></i>
+                <p class="student-quote">"Can you solve this puzzle? Mr. and Mrs. Mustard have six daughters and each daughter has one brother. How many people are in the family? There are nine Mustards in total! Thinking critically makes us true Eagles."</p>
+                <div class="student-meta">— Janet Azoge (S.S.1)</div>
+              </div>
+            </div>
+
+            <!-- Student 5 -->
+            <div class="carousel-item">
+              <div class="writing-slide">
+                <i class="fa-solid fa-quote-left fs-1 text-warning opacity-50 mb-3"></i>
+                <p class="student-quote">"A teacher popped out of the classroom leaving a test paper on her desk. Four students were in the room: Ku, Lu, Mu and Nu. Of these, only one tells the truth. Through logical reasoning, we proved that Lu took the paper!"</p>
+                <div class="student-meta">— Facilitator Ameh</div>
+              </div>
+            </div>
+
+          </div>
+
+          <!-- Carousel Controls -->
+          <button class="carousel-control-prev" type="button" data-bs-target="#studentTextCarousel" data-bs-slide="prev">
+            <span class="carousel-control-prev-icon opacity-75"></span>
+          </button>
+          <button class="carousel-control-next" type="button" data-bs-target="#studentTextCarousel" data-bs-slide="next">
+            <span class="carousel-control-next-icon opacity-75"></span>
+          </button>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- 4. Co-Curricular Activities (6 Image Slideshow) -->
+  <section class="py-5 bg-light">
+    <div class="container">
+      <div class="text-center mb-5" data-aos="fade-up">
+        <span class="badge bg-danger px-3 py-2 rounded-pill fw-bold">HOLISTIC EDUCATION</span>
+        <h2 class="fw-bold text-success mt-2">Co-Curricular Activities</h2>
+        <p class="text-secondary max-w-700 mx-auto">
+          The School encourages a lot of co-curricular activities to ensure a well-rounded education for all students.
+        </p>
+      </div>
+
+      <div id="cocurricularCarousel" class="carousel slide carousel-fade" data-aos="zoom-in">
+        <div class="carousel-inner rounded-4 shadow-lg">
+
+          <!-- Activity Image 1 -->
+          <div class="carousel-item active">
+            <div class="cocurricular-item" style="background-image: url('assets/img/3.jpg');">
+              <div class="cocurricular-overlay">
+                <div>
+                  <h4 class="fw-bold mb-1 text-warning">Science & STEM Exhibitions</h4>
+                  <p class="mb-0">Hands-on practical experiments and young inventors club demonstrations.</p>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <!-- Activity Image 2 -->
+          <div class="carousel-item">
+            <div class="cocurricular-item" style="background-image: url('assets/img/55.jpg');">
+              <div class="cocurricular-overlay">
+                <div>
+                  <h4 class="fw-bold mb-1 text-warning">Sports & Athletics Meet</h4>
+                  <p class="mb-0">Building physical endurance, teamwork, sportsmanship, and leadership.</p>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <!-- Activity Image 3 -->
+          <div class="carousel-item">
+            <div class="cocurricular-item" style="background-image: url('assets/img/43.jpg');">
+              <div class="cocurricular-overlay">
+                <div>
+                  <h4 class="fw-bold mb-1 text-warning">Cultural & Performing Arts</h4>
+                  <p class="mb-0">Celebrating rich diversity, drama presentations, and creative dance showcase.</p>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <!-- Activity Image 4 -->
+          <div class="carousel-item">
+            <div class="cocurricular-item" style="background-image: url('assets/img/53.jpg');">
+              <div class="cocurricular-overlay">
+                <div>
+                  <h4 class="fw-bold mb-1 text-warning">Debate & Literary Society</h4>
+                  <p class="mb-0">Sharpening public speaking, logical argumentations, and essay writing skills.</p>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <!-- Activity Image 5 -->
+          <div class="carousel-item">
+            <div class="cocurricular-item" style="background-image: url('assets/img/51.jpg');">
+              <div class="cocurricular-overlay">
+                <div>
+                  <h4 class="fw-bold mb-1 text-warning">ICT & Digital Literacy Club</h4>
+                  <p class="mb-0">Computer skills, coding fundamentals, and modern software training.</p>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <!-- Activity Image 6 -->
+          <div class="carousel-item">
+            <div class="cocurricular-item" style="background-image: url('assets/img/61.jpg');">
+              <div class="cocurricular-overlay">
+                <div>
+                  <h4 class="fw-bold mb-1 text-warning">Excursions & Field Trips</h4>
+                  <p class="mb-0">Educational site visits expanding knowledge beyond classroom boundaries.</p>
+                </div>
+              </div>
+            </div>
+          </div>
+
+        </div>
+
+        <button class="carousel-control-prev" type="button" data-bs-target="#cocurricularCarousel" data-bs-slide="prev">
+          <span class="carousel-control-prev-icon p-3 rounded-circle bg-dark bg-opacity-50"></span>
+        </button>
+        <button class="carousel-control-next" type="button" data-bs-target="#cocurricularCarousel" data-bs-slide="next">
+          <span class="carousel-control-next-icon p-3 rounded-circle bg-dark bg-opacity-50"></span>
+        </button>
+      </div>
+    </div>
+  </section>
+
+  <!-- 5. Facts About Eagles & Pillars Section -->
+  <section class="py-5">
+    <div class="container">
+      <div class="row g-4 align-items-center mb-5">
+        <div class="col-lg-6" data-aos="fade-right">
+          <div class="facts-box">
+            <span class="badge bg-success px-3 py-2 rounded-pill fw-bold mb-3">OUR INSPIRATION</span>
+            <h3 class="fw-bold text-success mb-3">Facts About Eagles</h3>
+            <p class="text-secondary leading-relaxed">
+              Eagles are some of the largest birds. They are at the top of the food chain, with some species feeding on big prey like Monkeys and Sloths. Eagles have amazing eyesight and can detect prey up to two miles away.
+            </p>
+            <p class="text-secondary leading-relaxed">
+              An Eagle may resemble a vulture in flight characteristics but has a fully feathered (often crested) head, strong feet equipped with great curved talons. A further difference is in foreign habits. Eagles feed mainly on live prey.
+            </p>
+            <div class="p-3 bg-light rounded-3 border-start border-4 border-success mt-3">
+              <p class="mb-0 fw-semibold text-dark">
+                An eagle is a symbol of freedom and peace. Our burnished learners will come out strongest academically, embodying the resilience, vision, and strength of the eagle!
+              </p>
+            </div>
+          </div>
+        </div>
+
+        <div class="col-lg-6" data-aos="fade-left">
+          <div class="row g-3">
+            <div class="col-12">
+              <div class="feature-card">
+                <div class="feature-icon"><i class="fa-solid fa-chalkboard-user"></i></div>
+                <h5 class="fw-bold text-dark">Professional Teachers</h5>
+                <p class="text-muted mb-0">Well-trained teachers to entrust adequate safety and care of your child.</p>
+              </div>
+            </div>
+            <div class="col-12">
+              <div class="feature-card">
+                <div class="feature-icon"><i class="fa-solid fa-ranking-star"></i></div>
+                <h5 class="fw-bold text-dark">Tomorrow's Leaders</h5>
+                <p class="text-muted mb-0">Through academics and extracurricular activities, our learners have ample opportunities to become leaders.</p>
+              </div>
+            </div>
+            <div class="col-12">
+              <div class="feature-card">
+                <div class="feature-icon"><i class="fa-solid fa-award"></i></div>
+                <h5 class="fw-bold text-dark">Accredited Certification</h5>
+                <p class="text-muted mb-0">Members of national educational organisations ensuring standard quality assurance.</p>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Community & Environment Row -->
+      <div class="row g-4 mt-2">
+        <div class="col-md-4" data-aos="fade-up" data-aos-delay="100">
+          <div class="feature-card">
+            <div class="feature-icon"><i class="fa-solid fa-school"></i></div>
+            <h5 class="fw-bold text-dark">Our Community</h5>
+            <p class="text-muted mb-0">Our spacious premises and well-maintained facilities create an attractive environment for learning.</p>
+          </div>
+        </div>
+        <div class="col-md-4" data-aos="fade-up" data-aos-delay="200">
+          <div class="feature-card">
+            <div class="feature-icon"><i class="fa-solid fa-user-tie"></i></div>
+            <h5 class="fw-bold text-dark">Good Teachers</h5>
+            <p class="text-muted mb-0">Well-trained teachers to entrust adequate safety and care of your child. The School has well-qualified teaching and non-teaching staff.</p>
+          </div>
+        </div>
+        <div class="col-md-4" data-aos="fade-up" data-aos-delay="300">
+          <div class="feature-card">
+            <div class="feature-icon"><i class="fa-solid fa-users-rectangle"></i></div>
+            <h5 class="fw-bold text-dark">Student/Teacher Ratio</h5>
+            <p class="text-muted mb-0">The School has a good student-teacher ratio. This allows regular one-on-one interaction and easy academic and emotional support.</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Footer -->
+  <footer>
+    <div class="container">
+      <div class="row g-4 mb-4">
+        <div class="col-lg-4">
+          <h5 class="text-white">Eagles Academy Aso Pada</h5>
+          <p>No. 42, Eagles Academy Road, Aso Pada, Mararaba, Nasarawa State, Nigeria.</p>
+          <p class="mb-1"><i class="fa-solid fa-phone me-2"></i> +234 807 616 6900, +234 814 022 9663</p>
+          <p><i class="fa-solid fa-envelope me-2"></i> eaglesacademy1@gmail.com</p>
+        </div>
+        <div class="col-lg-2">
+          <h5 class="text-white">Quick Links</h5>
+          <ul class="list-unstyled">
+            <li class="mb-2"><a href="index.html">Home</a></li>
+            <li class="mb-2"><a href="about.html">About Us</a></li>
+            <li class="mb-2"><a href="student-activities.html">Student Activities</a></li>
+            <li class="mb-2"><a href="gallery.html">Gallery</a></li>
+          </ul>
+        </div>
+        <div class="col-lg-6 text-lg-end">
+          <h5 class="text-white">School Motto</h5>
+          <p class="fst-italic text-warning fs-4 fw-bold">"Raising Future Giants"</p>
+        </div>
+      </div>
+      <hr class="border-secondary">
+      <div class="text-center pt-2">
+        <p class="mb-0">&copy; All Rights Reserved. Eagles Academy Aso Pada.</p>
+      </div>
+    </div>
+  </footer>
+
+  <!-- Required External JavaScript Libraries -->
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
+  <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
+
+  <!-- Embedded JavaScript Animation Functions -->
+  <script>
+    document.addEventListener('DOMContentLoaded', function () {
+      
+      // 1. Initialize Scroll Animations (AOS)
+      AOS.init({
+        duration: 900,
+        once: true,
+        easing: 'ease-in-out'
+      });
+
+      // 2. Initialize Main Hero Carousel (Changes slide every 6 seconds)
+      const heroCarouselElement = document.querySelector('#heroCarousel');
+      if (heroCarouselElement) {
+        new bootstrap.Carousel(heroCarouselElement, {
+          interval: 6000,
+          ride: 'carousel',
+          pause: 'hover'
+        });
+      }
+
+      // 3. Initialize Student Text-Writing Slideshow (Pauses for 8 seconds per slide)
+      const studentCarouselElement = document.querySelector('#studentTextCarousel');
+      if (studentCarouselElement) {
+        new bootstrap.Carousel(studentCarouselElement, {
+          interval: 8000,
+          ride: 'carousel',
+          pause: 'hover'
+        });
+      }
+
+      // 4. Initialize Co-Curricular Activities Gallery Carousel (Changes every 5 seconds)
+      const cocurricularCarouselElement = document.querySelector('#cocurricularCarousel');
+      if (cocurricularCarouselElement) {
+        new bootstrap.Carousel(cocurricularCarouselElement, {
+          interval: 5000,
+          ride: 'carousel',
+          pause: 'hover'
+        });
+      }
+
+      // 5. Sticky Navbar Shadow Effect on Scroll
+      const navbar = document.getElementById('mainNavbar');
+      window.addEventListener('scroll', function () {
+        if (window.scrollY > 50) {
+          navbar.classList.add('scrolled');
+        } else {
+          navbar.classList.remove('scrolled');
+        }
+      });
+
+    });
+  </script>
+</body>
+</html>

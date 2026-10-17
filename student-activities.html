@@ -1,0 +1,834 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Student Activities | Eagles Academy Aso Pada</title>
+
+  <!-- Favicon -->
+  <link rel="shortcut icon" href="assets/img/eimgg.jpg" type="image/x-icon">
+
+  <!-- Bootstrap 5 CSS -->
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
+  <!-- Font Awesome 6 Icons -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css">
+  <!-- Google Fonts -->
+  <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+  <!-- AOS Animation Library -->
+  <link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet">
+
+  <style>
+    :root {
+      --primary-color: #1E5631; /* School Primary Green */
+      --secondary-color: #D9534F; /* Crimson Accent */
+      --accent-color: #F4B41A; /* Academic Gold */
+      --dark-text: #2B2D42;
+      --light-bg: #F8F9FA;
+    }
+
+    body {
+      font-family: 'Plus Jakarta Sans', sans-serif;
+      color: var(--dark-text);
+      background-color: #FCFDFD;
+      overflow-x: hidden;
+    }
+
+    /* Top Bar & Navbar */
+    .top-bar {
+      background-color: var(--primary-color);
+      color: #ffffff;
+      font-size: 0.875rem;
+      padding: 8px 0;
+    }
+
+    .navbar {
+      box-shadow: 0 4px 15px rgba(0,0,0,0.05);
+      background: #ffffff;
+      padding: 12px 0;
+      transition: all 0.3s ease;
+    }
+    
+    .navbar.scrolled {
+      padding: 8px 0;
+      box-shadow: 0 6px 20px rgba(0,0,0,0.1);
+    }
+
+    .brand-title {
+      font-weight: 800;
+      color: var(--primary-color);
+      line-height: 1.1;
+      font-size: 1.15rem;
+    }
+    .brand-sub {
+      color: var(--secondary-color);
+      font-size: 0.8rem;
+      letter-spacing: 1px;
+    }
+
+    /* Page Header */
+    .page-header {
+      background: linear-gradient(rgba(15, 45, 25, 0.88), rgba(15, 45, 25, 0.88)), url('assets/img/28.jpg');
+      background-size: cover;
+      background-position: center;
+      color: white;
+      padding: 80px 0 60px;
+      text-align: center;
+    }
+
+    /* Activity Filter Buttons */
+    .activity-filter-btn {
+      border: 2px solid #E2E8F0;
+      background: #ffffff;
+      color: var(--dark-text);
+      font-weight: 600;
+      padding: 10px 24px;
+      border-radius: 50px;
+      margin: 5px;
+      transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+      cursor: pointer;
+    }
+
+    .activity-filter-btn:hover,
+    .activity-filter-btn.active {
+      background: var(--primary-color);
+      color: #ffffff;
+      border-color: var(--primary-color);
+      box-shadow: 0 8px 20px rgba(30, 86, 49, 0.25);
+      transform: translateY(-2px);
+    }
+
+    /* Colorful Poster Card Styling */
+    .poster-card {
+      border-radius: 24px;
+      padding: 35px 30px;
+      color: #ffffff;
+      box-shadow: 0 15px 35px rgba(0,0,0,0.12);
+      height: 100%;
+      position: relative;
+      overflow: hidden;
+      transition: transform 0.4s ease, box-shadow 0.4s ease;
+      border: 3px solid rgba(255, 255, 255, 0.3);
+    }
+
+    .poster-card:hover {
+      transform: translateY(-8px);
+      box-shadow: 0 22px 45px rgba(0,0,0,0.22);
+    }
+
+    /* Color Variations for Poster Cards */
+    .poster-card-blue {
+      background: linear-gradient(135deg, #1E3C72 0%, #2A5298 100%);
+    }
+
+    .poster-card-purple {
+      background: linear-gradient(135deg, #4A00E0 0%, #8E2DE2 100%);
+    }
+
+    .poster-card-orange {
+      background: linear-gradient(135deg, #FF416C 0%, #FF4B2B 100%);
+    }
+
+    .poster-card-teal {
+      background: linear-gradient(135deg, #11998E 0%, #38EF7D 100%);
+    }
+
+    .poster-card-amber {
+      background: linear-gradient(135deg, #F2994A 0%, #F2C94C 100%);
+      color: #111111;
+    }
+    .poster-card-amber .student-author-box,
+    .poster-card-amber .fact-item,
+    .poster-card-amber .quote-item {
+      background: rgba(0, 0, 0, 0.08);
+      color: #111111;
+      border-color: rgba(0, 0, 0, 0.15);
+    }
+
+    .student-author-box {
+      display: flex;
+      align-items: center;
+      gap: 15px;
+      background: rgba(255, 255, 255, 0.18);
+      backdrop-filter: blur(10px);
+      padding: 12px 20px;
+      border-radius: 16px;
+      margin-bottom: 25px;
+      border: 1px solid rgba(255, 255, 255, 0.3);
+    }
+
+    .student-avatar {
+      width: 50px;
+      height: 50px;
+      background: #ffffff;
+      color: var(--primary-color);
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 1.4rem;
+      box-shadow: 0 4px 10px rgba(0,0,0,0.15);
+      flex-shrink: 0;
+    }
+
+    /* Content Styling inside Poster Cards */
+    .fact-item {
+      background: rgba(255, 255, 255, 0.12);
+      backdrop-filter: blur(6px);
+      border-radius: 12px;
+      padding: 12px 16px;
+      margin-bottom: 10px;
+      font-size: 0.95rem;
+      display: flex;
+      align-items: flex-start;
+      gap: 12px;
+      border-left: 4px solid var(--accent-color);
+    }
+
+    .quote-item {
+      background: rgba(255, 255, 255, 0.15);
+      backdrop-filter: blur(8px);
+      border-radius: 14px;
+      padding: 16px 20px;
+      margin-bottom: 12px;
+      font-style: italic;
+      font-size: 0.98rem;
+      border-left: 4px solid #ffffff;
+      display: flex;
+      gap: 12px;
+    }
+
+    /* Accordion Reveal for Riddles */
+    .riddle-item {
+      background: rgba(255, 255, 255, 0.15);
+      backdrop-filter: blur(8px);
+      border-radius: 14px;
+      padding: 16px 20px;
+      margin-bottom: 14px;
+      border: 1px solid rgba(255, 255, 255, 0.25);
+    }
+
+    .riddle-answer-btn {
+      background: #ffffff;
+      color: var(--dark-text);
+      font-weight: 700;
+      font-size: 0.8rem;
+      padding: 6px 14px;
+      border-radius: 20px;
+      border: none;
+      margin-top: 10px;
+      cursor: pointer;
+      transition: all 0.2s ease;
+    }
+    .riddle-answer-btn:hover {
+      background: var(--accent-color);
+      color: #000000;
+    }
+
+    /* Curriculum Section */
+    .curriculum-card {
+      background: #ffffff;
+      border-radius: 24px;
+      padding: 45px;
+      box-shadow: 0 12px 30px rgba(0,0,0,0.06);
+      border-top: 6px solid var(--primary-color);
+    }
+
+    .subject-pill {
+      background: #F1F5F9;
+      color: var(--dark-text);
+      font-weight: 600;
+      padding: 12px 18px;
+      border-radius: 14px;
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      transition: all 0.3s ease;
+      border: 1px solid #E2E8F0;
+    }
+
+    .subject-pill:hover {
+      background: var(--primary-color);
+      color: #ffffff;
+      transform: translateY(-3px);
+      box-shadow: 0 6px 15px rgba(30, 86, 49, 0.2);
+    }
+
+    .subject-pill i {
+      color: var(--accent-color);
+      font-size: 1.1rem;
+    }
+
+    .subject-pill:hover i {
+      color: #ffffff;
+    }
+
+    /* Strategic Focus Academic Brief Poster */
+    .strategic-focus-poster {
+      background: linear-gradient(135deg, #1E5631 0%, #0F2D19 100%);
+      border-radius: 24px;
+      padding: 45px;
+      color: #ffffff;
+      box-shadow: 0 20px 40px rgba(0,0,0,0.2);
+      border: 3px solid var(--accent-color);
+    }
+
+    .strategic-goal-item {
+      background: rgba(255, 255, 255, 0.1);
+      backdrop-filter: blur(8px);
+      border-radius: 14px;
+      padding: 14px 20px;
+      font-size: 0.98rem;
+      font-weight: 600;
+      display: flex;
+      align-items: center;
+      gap: 15px;
+      border-left: 4px solid var(--accent-color);
+      transition: transform 0.3s ease;
+    }
+
+    .strategic-goal-item:hover {
+      transform: translateX(6px);
+      background: rgba(255, 255, 255, 0.18);
+    }
+
+    /* Footer */
+    footer {
+      background: #111;
+      color: #bbb;
+      padding-top: 60px;
+      padding-bottom: 30px;
+    }
+    footer h5 { color: #fff; font-weight: 700; margin-bottom: 20px; }
+    footer a { color: #bbb; text-decoration: none; }
+    footer a:hover { color: #fff; }
+  </style>
+</head>
+<body>
+
+  <!-- Top Bar -->
+  <div class="top-bar d-none d-md-block">
+    <div class="container d-flex justify-content-between align-items-center">
+      <div>
+        <i class="fa-solid fa-envelope me-2"></i> eaglesacademy1@gmail.com
+        <span class="mx-3">|</span>
+        <i class="fa-solid fa-phone me-2"></i> +234 807 616 6900, +234 814 022 9663
+      </div>
+      <div>
+        <i class="fa-solid fa-location-dot me-2"></i> Aso Pada, Mararaba, Nasarawa State
+      </div>
+    </div>
+  </div>
+
+  <!-- Navbar -->
+  <nav class="navbar navbar-expand-lg sticky-top" id="mainNavbar">
+    <div class="container">
+      <a class="navbar-brand d-flex align-items-center" href="index.html">
+        <img src="assets/img/eimgg.jpg" alt="Logo" height="48" class="me-2 rounded-circle">
+        <div>
+          <div class="brand-title">EAGLES ACADEMY</div>
+          <div class="brand-sub">ASO PADA</div>
+        </div>
+      </a>
+      <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#mainNav">
+        <span class="navbar-toggler-icon"></span>
+      </button>
+      <div class="collapse navbar-collapse" id="mainNav">
+        <ul class="navbar-nav ms-auto fw-semibold">
+          <li class="nav-item"><a class="nav-link" href="index.html">HOME</a></li>
+          <li class="nav-item"><a class="nav-link" href="about.html">ABOUT US</a></li>
+          <li class="nav-item"><a class="nav-link active" href="student-activities.html">STUDENT ACTIVITIES</a></li>
+          <li class="nav-item"><a class="nav-link" href="gallery.html">GALLERY</a></li>
+          <li class="nav-item"><a class="nav-link" href="contact.html">CONTACT</a></li>
+        </ul>
+      </div>
+    </div>
+  </nav>
+
+  <!-- Page Header -->
+  <section class="page-header">
+    <div class="container">
+      <span class="badge bg-warning text-dark px-3 py-2 rounded-pill fw-bold mb-2">CREATIVITY & CURRICULUM</span>
+      <h1 class="display-4 fw-extrabold text-white">Student Activities & Corner</h1>
+      <p class="lead text-light mb-0">Showcasing amazing facts, inspirational quotes, storytelling, puzzles, riddles, and our rich academic curriculum.</p>
+    </div>
+  </section>
+
+  <!-- Activity Filter Nav Section -->
+  <section class="py-4 bg-white border-bottom">
+    <div class="container text-center">
+      <div class="d-flex flex-wrap justify-content-center gap-2" id="activityFilters">
+        <button class="activity-filter-btn active" data-filter="all">All Showcase</button>
+        <button class="activity-filter-btn" data-filter="facts">Did You Know?</button>
+        <button class="activity-filter-btn" data-filter="stories">Story Time</button>
+        <button class="activity-filter-btn" data-filter="quotes">Inspirational Quotes</button>
+        <button class="activity-filter-btn" data-filter="puzzles">Puzzle Corner</button>
+        <button class="activity-filter-btn" data-filter="riddles">Riddles</button>
+      </div>
+    </div>
+  </section>
+
+  <!-- Poster Cards Showcase Section -->
+  <section class="py-5">
+    <div class="container">
+      <div class="row g-4" id="activityGrid">
+
+        <!-- 1. Did You Know? - Obed Bala (SSS 2) -->
+        <div class="col-lg-6 activity-card-item" data-category="facts" data-aos="fade-up">
+          <div class="poster-card poster-card-blue">
+            <div class="student-author-box">
+              <div class="student-avatar">
+                <i class="fa-solid fa-graduation-cap"></i>
+              </div>
+              <div>
+                <h5 class="fw-bold mb-0 text-white">Obed Bala</h5>
+                <span class="badge bg-warning text-dark fw-bold">SSS 2</span>
+              </div>
+            </div>
+
+            <div class="d-flex align-items-center gap-2 mb-3">
+              <i class="fa-solid fa-lightbulb fs-3 text-warning"></i>
+              <h3 class="fw-bold mb-0 text-white">Did You Know?</h3>
+            </div>
+
+            <div class="fact-list">
+              <div class="fact-item"><i class="fa-solid fa-globe text-warning mt-1"></i><span>Tokyo is the world's largest city with 37 million inhabitants.</span></div>
+              <div class="fact-item"><i class="fa-solid fa-feather text-warning mt-1"></i><span>The red-billed quelea is the most common bird on earth.</span></div>
+              <div class="fact-item"><i class="fa-solid fa-tree text-warning mt-1"></i><span>Canada has 9% of the world’s forest.</span></div>
+              <div class="fact-item"><i class="fa-solid fa-bone text-warning mt-1"></i><span>The human skeleton is made up of 206 bones.</span></div>
+              <div class="fact-item"><i class="fa-solid fa-pen-nib text-warning mt-1"></i><span>Shakespeare invented more than 1,700 words.</span></div>
+              <div class="fact-item"><i class="fa-solid fa-clock text-warning mt-1"></i><span>The average mammal takes 21 seconds to empty its bladder.</span></div>
+              <div class="fact-item"><i class="fa-solid fa-font text-warning mt-1"></i><span>“Strength” is the longest word in the English language with one vowel.</span></div>
+              <div class="fact-item"><i class="fa-solid fa-book text-warning mt-1"></i><span>The 1939 novel “Gadsby” is the longest book ever published that doesn’t contain the letter ‘e’.</span></div>
+              <div class="fact-item"><i class="fa-solid fa-ear-listen text-warning mt-1"></i><span>The smallest bones in the human body are found in the ear.</span></div>
+              <div class="fact-item"><i class="fa-solid fa-person text-warning mt-1"></i><span>The largest bone in the human body is the femur.</span></div>
+            </div>
+          </div>
+        </div>
+
+        <!-- 2. Story Time: Wise Advice - Divine Joy (Grade 5) -->
+        <div class="col-lg-6 activity-card-item" data-category="stories" data-aos="fade-up" data-aos-delay="100">
+          <div class="poster-card poster-card-teal">
+            <div class="student-author-box">
+              <div class="student-avatar">
+                <i class="fa-solid fa-child-reaching"></i>
+              </div>
+              <div>
+                <h5 class="fw-bold mb-0 text-white">Divine Joy</h5>
+                <span class="badge bg-light text-dark fw-bold">Grade 5</span>
+              </div>
+            </div>
+
+            <div class="d-flex align-items-center gap-2 mb-3">
+              <i class="fa-solid fa-book-open-reader fs-3 text-white"></i>
+              <h3 class="fw-bold mb-0 text-white">Story Time: Wise Advice</h3>
+            </div>
+
+            <div class="story-body leading-relaxed fs-6">
+              <p>Ramu and Shamu were good friends. Both of them were woodcutters who stayed near the woods. One day, both of them went to the woods to cut trees. Shamu began to boast about his bravery and told Ramu, <em>“I am not afraid of wild animals. I can kill them with one stroke of my sharp axe!”</em></p>
+              <p>Ramu heard this and said, <em>“That’s very brave! I am proud to have a friend like you.”</em></p>
+              <p>Suddenly, they saw a big black bear coming towards them. On seeing the bear, Shamu got so scared that he ran and climbed the nearest tree, leaving Ramu alone.</p>
+              <p>Ramu did not know how to climb a tree. He thought, <em>“Now what should I do? I have heard that bears never touch a dead person. I’ll try and save my life.”</em> As the bear approached fast, Ramu lay down on the ground pretending to be dead, holding his breath and keeping as still as a corpse.</p>
+              <p>The bear circled around him, smelt him, and thinking Ramu was dead, walked away into the woods. After the bear went away, Shamu came down from the tree and asked, <em>“Hey Ramu, I saw the bear whisper something in your ear. What did he say?”</em></p>
+              
+              <div class="p-3 rounded-3 bg-white text-dark fw-semibold mt-3 shadow-sm border-start border-4 border-warning">
+                <i class="fa-solid fa-quote-left text-success me-2 fs-5"></i>
+                Ramu answered: "The bear gave me very wise advice. He told me to <strong>never trust a friend who boasts about himself, for he shall leave you in times of difficulty.</strong>"
+              </div>
+              <p class="small mt-2 mb-0 opacity-75">Shamu was ashamed of himself and realized his mistake.</p>
+            </div>
+          </div>
+        </div>
+
+        <!-- 3. Inspirational Quotes - Martins (JSS 1) -->
+        <div class="col-lg-6 activity-card-item" data-category="quotes" data-aos="fade-up">
+          <div class="poster-card poster-card-purple">
+            <div class="student-author-box">
+              <div class="student-avatar">
+                <i class="fa-solid fa-user-graduate"></i>
+              </div>
+              <div>
+                <h5 class="fw-bold mb-0 text-white">Martins</h5>
+                <span class="badge bg-warning text-dark fw-bold">JSS 1</span>
+              </div>
+            </div>
+
+            <div class="d-flex align-items-center gap-2 mb-3">
+              <i class="fa-solid fa-quote-left fs-3 text-warning"></i>
+              <h3 class="fw-bold mb-0 text-white">Inspirational Quotes</h3>
+            </div>
+
+            <div class="quote-list">
+              <div class="quote-item">
+                <i class="fa-solid fa-star text-warning"></i>
+                <span>"Falling doesn’t make you a failure, but staying down does."</span>
+              </div>
+              <div class="quote-item">
+                <i class="fa-solid fa-star text-warning"></i>
+                <span>"Do not judge me by my success, judge me by how many times I fall down and get back up again."</span>
+              </div>
+              <div class="quote-item">
+                <i class="fa-solid fa-star text-warning"></i>
+                <span>"Failure will never overtake you if your determination to succeed is strong enough."</span>
+              </div>
+              <div class="quote-item">
+                <i class="fa-solid fa-star text-warning"></i>
+                <span>"Successful people don’t fear failure, but understand that it’s necessary to learn and grow from it."</span>
+              </div>
+              <div class="quote-item">
+                <i class="fa-solid fa-star text-warning"></i>
+                <span>"Success never comes the easy way; the key to success is hard work."</span>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- 4. Puzzle Corner - Facilitator Ameh -->
+        <div class="col-lg-6 activity-card-item" data-category="puzzles" data-aos="fade-up" data-aos-delay="100">
+          <div class="poster-card poster-card-orange">
+            <div class="student-author-box">
+              <div class="student-avatar">
+                <i class="fa-solid fa-chalkboard-user"></i>
+              </div>
+              <div>
+                <h5 class="fw-bold mb-0 text-white">Facilitator Ameh</h5>
+                <span class="badge bg-light text-danger fw-bold">Academic Staff</span>
+              </div>
+            </div>
+
+            <div class="d-flex align-items-center gap-2 mb-3">
+              <i class="fa-solid fa-puzzle-piece fs-3 text-warning"></i>
+              <h3 class="fw-bold mb-0 text-white">Puzzle Corner</h3>
+            </div>
+
+            <div class="p-3 bg-white text-dark rounded-4 mb-3 shadow-sm">
+              <h6 class="fw-bold text-danger mb-2"><i class="fa-solid fa-file-circle-question me-2"></i>The Missing Test Paper</h6>
+              <p class="small mb-2">A teacher popped out of the classroom, leaving a test paper on her desk. When she came back, it was missing! Four students were in the room: <strong>Ku, Lu, Mu, and Nu</strong>. Of these, <em>only one tells the truth</em>.</p>
+              <ul class="list-unstyled small mb-0 fw-semibold">
+                <li><i class="fa-solid fa-comment text-primary me-2"></i>Ku said: "Mu took it."</li>
+                <li><i class="fa-solid fa-comment text-primary me-2"></i>Lu said: "I didn't take it."</li>
+                <li><i class="fa-solid fa-comment text-primary me-2"></i>Mu said: "Lu is lying."</li>
+                <li><i class="fa-solid fa-comment text-primary me-2"></i>Nu said: "Mu is lying."</li>
+              </ul>
+            </div>
+
+            <div class="p-3 rounded-3 bg-dark text-white d-flex align-items-center justify-content-between">
+              <span class="fw-bold"><i class="fa-solid fa-key text-warning me-2"></i>Who took the test paper?</span>
+              <button class="btn btn-warning btn-sm fw-bold rounded-pill" type="button" data-bs-toggle="collapse" data-bs-target="#puzzleAnswer">Reveal Answer</button>
+            </div>
+            <div class="collapse mt-2" id="puzzleAnswer">
+              <div class="alert alert-success fw-bold text-center mb-0 rounded-3">
+                <i class="fa-solid fa-circle-check me-2"></i>Answer: Lu took the test paper!
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- 5. Riddles - Janet Azoge (S.S.1) -->
+        <div class="col-lg-12 activity-card-item" data-category="riddles" data-aos="fade-up">
+          <div class="poster-card poster-card-amber">
+            <div class="student-author-box">
+              <div class="student-avatar">
+                <i class="fa-solid fa-brain"></i>
+              </div>
+              <div>
+                <h5 class="fw-bold mb-0">Janet Azoge</h5>
+                <span class="badge bg-dark text-white fw-bold">S.S. 1</span>
+              </div>
+            </div>
+
+            <div class="d-flex align-items-center gap-2 mb-3">
+              <i class="fa-solid fa-icons fs-3 text-dark"></i>
+              <h3 class="fw-bold mb-0 text-dark">Riddles & Mind Teasers</h3>
+            </div>
+
+            <div class="row g-3">
+              <!-- Riddle 1 -->
+              <div class="col-md-6">
+                <div class="riddle-item">
+                  <p class="fw-bold mb-1"><i class="fa-solid fa-circle-question me-2"></i>1. Mr. and Mrs. Mustard have six daughters and each daughter has one brother. How many people are in the Mustard family?</p>
+                  <button class="riddle-answer-btn" type="button" data-bs-toggle="collapse" data-bs-target="#ans1">Show Answer</button>
+                  <div class="collapse mt-2" id="ans1">
+                    <span class="badge bg-dark text-white p-2 w-100 text-start">There are 9 Mustards in the family (6 daughters, 1 brother shared by all, and Mr. & Mrs. Mustard).</span>
+                  </div>
+                </div>
+              </div>
+
+              <!-- Riddle 2 -->
+              <div class="col-md-6">
+                <div class="riddle-item">
+                  <p class="fw-bold mb-1"><i class="fa-solid fa-circle-question me-2"></i>2. I am something people love or hate. I change people's appearance and thoughts. What am I?</p>
+                  <button class="riddle-answer-btn" type="button" data-bs-toggle="collapse" data-bs-target="#ans2">Show Answer</button>
+                  <div class="collapse mt-2" id="ans2">
+                    <span class="badge bg-dark text-white p-2 w-100 text-start">Answer: Age</span>
+                  </div>
+                </div>
+              </div>
+
+              <!-- Riddle 3 -->
+              <div class="col-md-6">
+                <div class="riddle-item">
+                  <p class="fw-bold mb-1"><i class="fa-solid fa-circle-question me-2"></i>3. Only one color but not one size, stuck at the bottom yet easily flies. Present in Sun but not in rain. Doing no harm and feeling no pain. What am I?</p>
+                  <button class="riddle-answer-btn" type="button" data-bs-toggle="collapse" data-bs-target="#ans3">Show Answer</button>
+                  <div class="collapse mt-2" id="ans3">
+                    <span class="badge bg-dark text-white p-2 w-100 text-start">Answer: A Shadow</span>
+                  </div>
+                </div>
+              </div>
+
+              <!-- Riddle 4 -->
+              <div class="col-md-6">
+                <div class="riddle-item">
+                  <p class="fw-bold mb-1"><i class="fa-solid fa-circle-question me-2"></i>4. Who is that with a neck and no head, two arms and no hands?</p>
+                  <button class="riddle-answer-btn" type="button" data-bs-toggle="collapse" data-bs-target="#ans4">Show Answer</button>
+                  <div class="collapse mt-2" id="ans4">
+                    <span class="badge bg-dark text-white p-2 w-100 text-start">Answer: A Shirt</span>
+                  </div>
+                </div>
+              </div>
+
+              <!-- Riddle 5 -->
+              <div class="col-md-6">
+                <div class="riddle-item">
+                  <p class="fw-bold mb-1"><i class="fa-solid fa-circle-question me-2"></i>5. If eleven plus two equals one, what does nine plus five equal?</p>
+                  <button class="riddle-answer-btn" type="button" data-bs-toggle="collapse" data-bs-target="#ans5">Show Answer</button>
+                  <div class="collapse mt-2" id="ans5">
+                    <span class="badge bg-dark text-white p-2 w-100 text-start">Answer: 2 O'clock (11 o'clock + 2 hrs = 1 o'clock; 9 o'clock + 5 hrs = 2 o'clock).</span>
+                  </div>
+                </div>
+              </div>
+
+              <!-- Riddle 6 -->
+              <div class="col-md-6">
+                <div class="riddle-item">
+                  <p class="fw-bold mb-1"><i class="fa-solid fa-circle-question me-2"></i>6. Can you write down eight eights so that they add up to one thousand?</p>
+                  <button class="riddle-answer-btn" type="button" data-bs-toggle="collapse" data-bs-target="#ans6">Show Answer</button>
+                  <div class="collapse mt-2" id="ans6">
+                    <span class="badge bg-dark text-white p-2 w-100 text-start">Answer: 888 + 88 + 8 + 8 + 8 = 1,000</span>
+                  </div>
+                </div>
+              </div>
+
+              <!-- Riddle 7 -->
+              <div class="col-md-12">
+                <div class="riddle-item mb-0">
+                  <p class="fw-bold mb-1"><i class="fa-solid fa-circle-question me-2"></i>7. What English word retains the same pronunciation even after you take away five letters?</p>
+                  <button class="riddle-answer-btn" type="button" data-bs-toggle="collapse" data-bs-target="#ans7">Show Answer</button>
+                  <div class="collapse mt-2" id="ans7">
+                    <span class="badge bg-dark text-white p-2 w-100 text-start">Answer: Queue (Remove 'u-e-u-e' and it is still pronounced 'Q').</span>
+                  </div>
+                </div>
+              </div>
+
+            </div>
+          </div>
+        </div>
+
+      </div>
+    </div>
+  </section>
+
+  <!-- School Curriculum Showcase -->
+  <section class="py-5 bg-light" id="curriculum">
+    <div class="container">
+      <div class="curriculum-card" data-aos="fade-up">
+        <div class="d-flex align-items-center mb-4">
+          <div class="bg-success text-white p-3 rounded-circle me-3">
+            <i class="fa-solid fa-book-bookmark fs-2"></i>
+          </div>
+          <div>
+            <span class="badge bg-success px-3 py-2 rounded-pill fw-bold">ACADEMIC EXCELLENCE</span>
+            <h2 class="fw-bold text-success mb-0 mt-1">Our Comprehensive Curriculum</h2>
+          </div>
+        </div>
+
+        <p class="text-secondary leading-relaxed fs-6 mb-4">
+          The Curriculum consists of a wide range of learning experiences which gives a balanced grounding in all main subjects. Highly qualified and experienced teachers guide the students in learning, aided by well-equipped laboratories and teaching aids to make teaching and learning interesting in all subject areas. The tutorial system further consolidates learning, developing and improving the creative and innovative abilities of our students.
+        </p>
+
+        <h5 class="fw-bold text-dark mb-3"><i class="fa-solid fa-layer-group text-warning me-2"></i>Subjects Offered:</h5>
+        
+        <div class="row g-3">
+          <div class="col-lg-3 col-md-4 col-sm-6"><div class="subject-pill"><i class="fa-solid fa-book-open"></i><span>English Language</span></div></div>
+          <div class="col-lg-3 col-md-4 col-sm-6"><div class="subject-pill"><i class="fa-solid fa-calculator"></i><span>Mathematics</span></div></div>
+          <div class="col-lg-3 col-md-4 col-sm-6"><div class="subject-pill"><i class="fa-solid fa-atom"></i><span>Physics</span></div></div>
+          <div class="col-lg-3 col-md-4 col-sm-6"><div class="subject-pill"><i class="fa-solid fa-vial"></i><span>Chemistry</span></div></div>
+          <div class="col-lg-3 col-md-4 col-sm-6"><div class="subject-pill"><i class="fa-solid fa-dna"></i><span>Biology</span></div></div>
+          <div class="col-lg-3 col-md-4 col-sm-6"><div class="subject-pill"><i class="fa-solid fa-feather-pointed"></i><span>Lit-in-English</span></div></div>
+          <div class="col-lg-3 col-md-4 col-sm-6"><div class="subject-pill"><i class="fa-solid fa-briefcase"></i><span>Business Studies</span></div></div>
+          <div class="col-lg-3 col-md-4 col-sm-6"><div class="subject-pill"><i class="fa-solid fa-chart-line"></i><span>Commerce</span></div></div>
+          <div class="col-lg-3 col-md-4 col-sm-6"><div class="subject-pill"><i class="fa-solid fa-coins"></i><span>Economics</span></div></div>
+          <div class="col-lg-3 col-md-4 col-sm-6"><div class="subject-pill"><i class="fa-solid fa-file-invoice-dollar"></i><span>Financial Accounting</span></div></div>
+          <div class="col-lg-3 col-md-4 col-sm-6"><div class="subject-pill"><i class="fa-solid fa-building-columns"></i><span>Government</span></div></div>
+          <div class="col-lg-3 col-md-4 col-sm-6"><div class="subject-pill"><i class="fa-solid fa-earth-africa"></i><span>Geography</span></div></div>
+          <div class="col-lg-3 col-md-4 col-sm-6"><div class="subject-pill"><i class="fa-solid fa-palette"></i><span>Visual Arts</span></div></div>
+          <div class="col-lg-3 col-md-4 col-sm-6"><div class="subject-pill"><i class="fa-solid fa-landmark"></i><span>History</span></div></div>
+          <div class="col-lg-3 col-md-4 col-sm-6"><div class="subject-pill"><i class="fa-solid fa-wheat-awn"></i><span>Agricultural Science</span></div></div>
+          <div class="col-lg-3 col-md-4 col-sm-6"><div class="subject-pill"><i class="fa-solid fa-laptop-code"></i><span>ICT & Computer Studies</span></div></div>
+          <div class="col-lg-3 col-md-4 col-sm-6"><div class="subject-pill"><i class="fa-solid fa-cross"></i><span>C.R.K</span></div></div>
+          <div class="col-lg-3 col-md-4 col-sm-6"><div class="subject-pill"><i class="fa-solid fa-person-running"></i><span>Physical & Health Ed.</span></div></div>
+          <div class="col-lg-3 col-md-4 col-sm-6"><div class="subject-pill"><i class="fa-solid fa-microscope"></i><span>Basic Science</span></div></div>
+          <div class="col-lg-3 col-md-4 col-sm-6"><div class="subject-pill"><i class="fa-solid fa-scale-balanced"></i><span>Civic Education</span></div></div>
+          <div class="col-lg-3 col-md-4 col-sm-6"><div class="subject-pill"><i class="fa-solid fa-users"></i><span>Social Studies</span></div></div>
+          <div class="col-lg-3 col-md-4 col-sm-6"><div class="subject-pill"><i class="fa-solid fa-utensils"></i><span>Home Economics</span></div></div>
+          <div class="col-lg-3 col-md-4 col-sm-6"><div class="subject-pill"><i class="fa-solid fa-ellipsis"></i><span>...and more</span></div></div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Strategic Focus Academic Brief Poster -->
+  <section class="py-5">
+    <div class="container">
+      <div class="strategic-focus-poster" data-aos="zoom-in">
+        <div class="text-center mb-5">
+          <span class="badge bg-warning text-dark px-3 py-2 rounded-pill fw-bold mb-2">OUR STRATEGIC FOCUS</span>
+          <h2 class="display-6 fw-extrabold text-white mb-2">Academic Brief & Main Goals</h2>
+          <p class="text-light opacity-75">The institutional objectives guiding excellence at Eagles Academy Aso Pada</p>
+        </div>
+
+        <div class="row g-3">
+          <div class="col-lg-6">
+            <div class="strategic-goal-item">
+              <i class="fa-solid fa-circle-check text-warning fs-5"></i>
+              <span>To make this citadel of learning a model for others.</span>
+            </div>
+          </div>
+          <div class="col-lg-6">
+            <div class="strategic-goal-item">
+              <i class="fa-solid fa-circle-check text-warning fs-5"></i>
+              <span>To increase the knowledge and skills of the learners/students.</span>
+            </div>
+          </div>
+          <div class="col-lg-6">
+            <div class="strategic-goal-item">
+              <i class="fa-solid fa-circle-check text-warning fs-5"></i>
+              <span>To build the confidence and potential of the learners.</span>
+            </div>
+          </div>
+          <div class="col-lg-6">
+            <div class="strategic-goal-item">
+              <i class="fa-solid fa-circle-check text-warning fs-5"></i>
+              <span>To encourage and motivate learners to develop their intellectual and social faculties.</span>
+            </div>
+          </div>
+          <div class="col-lg-6">
+            <div class="strategic-goal-item">
+              <i class="fa-solid fa-circle-check text-warning fs-5"></i>
+              <span>To provide a high standard of facilities and learning.</span>
+            </div>
+          </div>
+          <div class="col-lg-6">
+            <div class="strategic-goal-item">
+              <i class="fa-solid fa-circle-check text-warning fs-5"></i>
+              <span>To inculcate moral values into the learners.</span>
+            </div>
+          </div>
+          <div class="col-lg-6">
+            <div class="strategic-goal-item">
+              <i class="fa-solid fa-circle-check text-warning fs-5"></i>
+              <span>To make learning very interesting and child-centered.</span>
+            </div>
+          </div>
+          <div class="col-lg-6">
+            <div class="strategic-goal-item">
+              <i class="fa-solid fa-circle-check text-warning fs-5"></i>
+              <span>To develop the zeal to attain a greater height in life.</span>
+            </div>
+          </div>
+          <div class="col-lg-6">
+            <div class="strategic-goal-item">
+              <i class="fa-solid fa-circle-check text-warning fs-5"></i>
+              <span>To teach the learner the way of the Lord and to apply it in their daily activities.</span>
+            </div>
+          </div>
+          <div class="col-lg-6">
+            <div class="strategic-goal-item">
+              <i class="fa-solid fa-circle-check text-warning fs-5"></i>
+              <span>To produce a safe and secure environment where all can learn without anxiety.</span>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Footer -->
+  <footer>
+    <div class="container">
+      <div class="row g-4 mb-4">
+        <div class="col-lg-4">
+          <h5 class="text-white">Eagles Academy Aso Pada</h5>
+          <p>No. 42, Eagles Academy Road, Aso Pada, Mararaba, Nasarawa State, Nigeria.</p>
+          <p class="mb-1"><i class="fa-solid fa-phone me-2"></i> +234 807 616 6900</p>
+          <p><i class="fa-solid fa-envelope me-2"></i> eaglesacademy1@gmail.com</p>
+        </div>
+        <div class="col-lg-2">
+          <h5 class="text-white">Quick Links</h5>
+          <ul class="list-unstyled">
+            <li class="mb-2"><a href="index.html">Home</a></li>
+            <li class="mb-2"><a href="about.html">About Us</a></li>
+            <li class="mb-2"><a href="student-activities.html">Student Activities</a></li>
+            <li class="mb-2"><a href="gallery.html">Gallery</a></li>
+          </ul>
+        </div>
+        <div class="col-lg-6 text-lg-end">
+          <h5 class="text-white">School Motto</h5>
+          <p class="fst-italic text-warning fs-4 fw-bold">"Raising Future Giants"</p>
+        </div>
+      </div>
+      <hr class="border-secondary">
+      <div class="text-center pt-2">
+        <p class="mb-0">&copy; All Rights Reserved. Eagles Academy Aso Pada.</p>
+      </div>
+    </div>
+  </footer>
+
+  <!-- Scripts -->
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
+  <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
+  <script>
+    document.addEventListener('DOMContentLoaded', function () {
+      AOS.init({ duration: 900, once: true });
+
+      // Navbar Scroll Effect
+      const navbar = document.getElementById('mainNavbar');
+      window.addEventListener('scroll', function () {
+        if (window.scrollY > 50) {
+          navbar.classList.add('scrolled');
+        } else {
+          navbar.classList.remove('scrolled');
+        }
+      });
+
+      // Filter Activity Cards
+      const filterButtons = document.querySelectorAll('.activity-filter-btn');
+      const activityCards = document.querySelectorAll('.activity-card-item');
+
+      filterButtons.forEach(button => {
+        button.addEventListener('click', function () {
+          filterButtons.forEach(btn => btn.classList.remove('active'));
+          this.classList.add('active');
+
+          const filterValue = this.getAttribute('data-filter');
+
+          activityCards.forEach(card => {
+            if (filterValue === 'all' || card.getAttribute('data-category') === filterValue) {
+              card.style.display = 'block';
+              setTimeout(() => {
+                card.style.opacity = '1';
+                card.style.transform = 'scale(1)';
+              }, 50);
+            } else {
+              card.style.opacity = '0';
+              card.style.transform = 'scale(0.85)';
+              setTimeout(() => {
+                card.style.display = 'none';
+              }, 300);
+            }
+          });
+        });
+      });
+    });
+  </script>
+</body>
+</html>

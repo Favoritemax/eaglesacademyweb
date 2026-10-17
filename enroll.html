@@ -1,0 +1,618 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Enrollment & Campus Life | Eagles Academy</title>
+
+  <!-- Favicon -->
+  <link rel="shortcut icon" href="assets/img/eimgg.jpg" type="image/x-icon">
+
+  <!-- Bootstrap 5 CSS -->
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
+  <!-- Font Awesome 6 Icons -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css">
+  <!-- Google Fonts -->
+  <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+  <!-- AOS Animation Library -->
+  <link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet">
+
+  <style>
+    :root {
+      --primary-color: #1E5631;
+      --secondary-color: #D9534F;
+      --accent-color: #F4B41A;
+      --dark-text: #2B2D42;
+      --light-bg: #F8F9FA;
+    }
+
+    body {
+      font-family: 'Plus Jakarta Sans', sans-serif;
+      color: var(--dark-text);
+      background-color: #FCFDFD;
+      overflow-x: hidden;
+    }
+
+    /* Top Bar Floating Back Button */
+    .sticky-nav-bar {
+      background: #ffffff;
+      box-shadow: 0 4px 20px rgba(0,0,0,0.08);
+      padding: 15px 0;
+      position: sticky;
+      top: 0;
+      z-index: 1000;
+    }
+
+    /* Animated Dynamic Back Button */
+    .btn-back-home {
+      background: linear-gradient(135deg, var(--primary-color), #2E7D32);
+      color: #ffffff;
+      font-weight: 700;
+      padding: 12px 28px;
+      border-radius: 50px;
+      text-decoration: none;
+      display: inline-flex;
+      align-items: center;
+      gap: 12px;
+      box-shadow: 0 8px 20px rgba(30, 86, 49, 0.3);
+      transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+      position: relative;
+      overflow: hidden;
+    }
+
+    .btn-back-home i {
+      animation: bounceLeft 1.8s infinite;
+    }
+
+    .btn-back-home:hover {
+      color: #ffffff;
+      transform: translateY(-4px) scale(1.03);
+      box-shadow: 0 12px 25px rgba(30, 86, 49, 0.45);
+      background: linear-gradient(135deg, #2E7D32, var(--accent-color));
+    }
+
+    @keyframes bounceLeft {
+      0%, 100% { transform: translateX(0); }
+      50% { transform: translateX(-6px); }
+    }
+
+    /* Hero Header Banner */
+    .enroll-hero {
+      background: linear-gradient(rgba(15, 45, 25, 0.85), rgba(15, 45, 25, 0.85)), url('assets/img/64.jpg');
+      background-size: cover;
+      background-position: center;
+      color: white;
+      padding: 70px 0 50px;
+      text-align: center;
+    }
+
+    /* Admission Steps */
+    .step-card {
+      background: #ffffff;
+      border-radius: 20px;
+      padding: 25px;
+      border: 1px solid #E2E8F0;
+      box-shadow: 0 10px 30px rgba(0,0,0,0.04);
+      height: 100%;
+      position: relative;
+      transition: transform 0.3s ease;
+    }
+    .step-card:hover {
+      transform: translateY(-5px);
+    }
+    .step-num {
+      width: 45px;
+      height: 45px;
+      background: var(--accent-color);
+      color: #000;
+      font-weight: 800;
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      margin-bottom: 15px;
+    }
+
+    /* Call Box / Apply Info */
+    .call-apply-box {
+      background: linear-gradient(135deg, #1E5631 0%, #0F2D19 100%);
+      color: #ffffff;
+      border-radius: 24px;
+      padding: 40px;
+      box-shadow: 0 15px 35px rgba(0,0,0,0.12);
+      border: 2px solid var(--accent-color);
+    }
+
+    .phone-badge {
+      background: rgba(255, 255, 255, 0.15);
+      backdrop-filter: blur(5px);
+      border: 1px solid rgba(255, 255, 255, 0.3);
+      border-radius: 15px;
+      padding: 12px 20px;
+      display: inline-flex;
+      align-items: center;
+      gap: 10px;
+      color: #fff;
+      text-decoration: none;
+      font-weight: 700;
+      font-size: 1.1rem;
+      transition: all 0.3s ease;
+    }
+    .phone-badge:hover {
+      background: var(--accent-color);
+      color: #000;
+      transform: translateY(-3px);
+    }
+
+    /* Form Design */
+    .enroll-form-card {
+      background: #ffffff;
+      border-radius: 24px;
+      padding: 35px;
+      box-shadow: 0 15px 35px rgba(0,0,0,0.06);
+      border-top: 6px solid var(--primary-color);
+    }
+
+    .form-control, .form-select {
+      border: 2px solid #E2E8F0;
+      padding: 12px 16px;
+      border-radius: 12px;
+      font-weight: 500;
+    }
+    .form-control:focus, .form-select:focus {
+      border-color: var(--primary-color);
+      box-shadow: 0 0 0 4px rgba(30, 86, 49, 0.12);
+    }
+
+    /* Video Section Cards with Glowing Animated Borders */
+    .video-card {
+      background: #ffffff;
+      border-radius: 20px;
+      overflow: hidden;
+      box-shadow: 0 12px 30px rgba(0,0,0,0.08);
+      position: relative;
+      padding: 6px;
+      background: linear-gradient(135deg, var(--primary-color), var(--accent-color), var(--secondary-color));
+      background-size: 200% 200%;
+      animation: borderGlow 4s ease infinite;
+      transition: transform 0.3s ease;
+    }
+
+    .video-card:hover {
+      transform: translateY(-8px);
+    }
+
+    .video-inner {
+      background: #ffffff;
+      border-radius: 16px;
+      overflow: hidden;
+    }
+
+    .video-wrapper {
+      position: relative;
+      padding-bottom: 56.25%; /* 16:9 Aspect Ratio */
+      height: 0;
+      overflow: hidden;
+      background: #000;
+    }
+
+    .video-wrapper iframe, .video-wrapper video {
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      border: 0;
+    }
+
+    @keyframes borderGlow {
+      0% { background-position: 0% 50%; }
+      50% { background-position: 100% 50%; }
+      100% { background-position: 0% 50%; }
+    }
+
+    /* Director News Poster Card */
+    .news-poster-card {
+      background: #ffffff;
+      border-radius: 24px;
+      overflow: hidden;
+      box-shadow: 0 20px 45px rgba(0,0,0,0.09);
+      border: 1px solid #E2E8F0;
+    }
+
+    .news-poster-header {
+      background: linear-gradient(135deg, var(--primary-color), #0F2D19);
+      color: white;
+      padding: 35px 30px;
+      position: relative;
+    }
+
+    .news-poster-header::after {
+      content: '';
+      position: absolute;
+      bottom: 0;
+      left: 0;
+      width: 100%;
+      height: 6px;
+      background: linear-gradient(90deg, var(--accent-color), var(--secondary-color));
+    }
+
+    .news-body {
+      padding: 35px;
+      line-height: 1.8;
+      font-size: 1.05rem;
+      color: #333;
+    }
+
+    .quote-box {
+      border-left: 5px solid var(--accent-color);
+      background: #FFFDF5;
+      padding: 15px 20px;
+      margin: 20px 0;
+      border-radius: 0 12px 12px 0;
+      font-style: italic;
+    }
+
+    /* Footer */
+    footer {
+      background: #111;
+      color: #bbb;
+      padding-top: 50px;
+      padding-bottom: 30px;
+    }
+  </style>
+</head>
+<body>
+
+  <!-- Top Sticky Navigation Bar -->
+  <div class="sticky-nav-bar">
+    <div class="container d-flex justify-content-between align-items-center">
+      <a class="navbar-brand d-flex align-items-center" href="index.html">
+        <img src="assets/img/eimgg.jpg" alt="Logo" height="45" class="me-2 rounded-circle">
+        <div>
+          <span class="fw-bold text-success fs-5">EAGLES ACADEMY</span>
+        </div>
+      </a>
+      
+      <!-- Animated Moving Back To Home Button -->
+      <a href="index.html" class="btn-back-home">
+        <i class="fa-solid fa-arrow-left"></i>
+        <span>Back To Home</span>
+      </a>
+    </div>
+  </div>
+
+  <!-- Hero Banner -->
+  <section class="enroll-hero">
+    <div class="container">
+      <span class="badge bg-warning text-dark px-3 py-2 rounded-pill fw-bold mb-2">ADMISSIONS OPEN FOR NEW TERM</span>
+      <h1 class="display-4 fw-extrabold text-white">Enroll Your Child Today</h1>
+      <p class="lead text-light mb-0">Join our academic family dedicated to raising future leaders and giants.</p>
+    </div>
+  </section>
+
+  <!-- Step 1 & Application Details -->
+  <section class="py-5">
+    <div class="container">
+      
+      <!-- How to Apply Cards -->
+      <div class="row g-4 mb-5" data-aos="fade-up">
+        <div class="col-md-4">
+          <div class="step-card">
+            <div class="step-num">1</div>
+            <h5 class="fw-bold">Visit Campus</h5>
+            <p class="text-muted small mb-0">Obtain the admission application form directly within the school environment during office hours (8am - 3pm).</p>
+          </div>
+        </div>
+        <div class="col-md-4">
+          <div class="step-card">
+            <div class="step-num">2</div>
+            <h5 class="fw-bold">Assessment</h5>
+            <p class="text-muted small mb-0">Schedule a placement interaction/assessment for your child to enable tailored academic orientation.</p>
+          </div>
+        </div>
+        <div class="col-md-4">
+          <div class="step-card">
+            <div class="step-num">3</div>
+            <h5 class="fw-bold">Final Registration</h5>
+            <p class="text-muted small mb-0">Complete document submission and fee payment to secure your child's seat for the upcoming term.</p>
+          </div>
+        </div>
+      </div>
+
+      <!-- Main Application Box & Direct Contact -->
+      <div class="row g-4 align-items-center">
+        <!-- Call Box Card -->
+        <div class="col-lg-5" data-aos="fade-right">
+          <div class="call-apply-box">
+            <span class="badge bg-warning text-dark fw-bold px-3 py-1 rounded-pill mb-3">PHYSICAL / TELEPHONE INQUIRY</span>
+            <h3 class="fw-bold text-white mb-3">Apply Within School Environment</h3>
+            <p class="text-light opacity-90 mb-4">
+              Parents and guardians are warmly welcome to visit our administrative block to purchase forms and tour our modern classrooms and facilities.
+            </p>
+            
+            <h6 class="fw-bold text-warning mb-2"><i class="fa-solid fa-headset me-2"></i>Direct Admission Phone Lines:</h6>
+            <div class="d-flex flex-column gap-2 mb-4">
+              <a href="tel:+2348076166900" class="phone-badge">
+                <i class="fa-solid fa-phone-volume text-warning"></i> +234 807 616 6900
+              </a>
+              <a href="tel:+2348140229663" class="phone-badge">
+                <i class="fa-solid fa-phone-volume text-warning"></i> +234 814 022 9663
+              </a>
+            </div>
+
+            <div class="small text-light opacity-75">
+              <i class="fa-solid fa-clock me-1 text-warning"></i> Operating Hours: <strong>8:00 AM – 3:00 PM (Monday – Friday)</strong>
+            </div>
+          </div>
+        </div>
+
+        <!-- Online Pre-Registration Form -->
+        <div class="col-lg-7" data-aos="fade-left">
+          <div class="enroll-form-card">
+            <h3 class="fw-bold text-success mb-2">Online Enrollment Pre-Registration</h3>
+            <p class="text-muted small mb-4">Fill out this quick reservation form and our admission team will contact you immediately.</p>
+
+            <form id="enrollForm" onsubmit="submitEnrollment(event)">
+              <div class="row g-3">
+                <div class="col-md-6">
+                  <label class="form-label fw-bold small">Parent/Guardian Name *</label>
+                  <input type="text" class="form-control" placeholder="e.g. Mr. & Mrs. Okoh" required>
+                </div>
+                <div class="col-md-6">
+                  <label class="form-label fw-bold small">Phone Number *</label>
+                  <input type="tel" class="form-control" placeholder="e.g. +234 801 234 5678" required>
+                </div>
+                <div class="col-md-6">
+                  <label class="form-label fw-bold small">Child's Full Name *</label>
+                  <input type="text" class="form-control" placeholder="Child's Name" required>
+                </div>
+                <div class="col-md-6">
+                  <label class="form-label fw-bold small">Class / Grade Seeking *</label>
+                  <select class="form-select" required>
+                    <option value="" selected disabled>Select Grade Level</option>
+                    <option>Creche / Creche Care</option>
+                    <option>Nursery Level</option>
+                    <option>Primary Level</option>
+                    <option>Junior Secondary (JSS)</option>
+                    <option>Senior Secondary (SSS)</option>
+                  </select>
+                </div>
+                <div class="col-12">
+                  <label class="form-label fw-bold small">Home Address / Location</label>
+                  <input type="text" class="form-control" placeholder="e.g. Aso Pada, Mararaba">
+                </div>
+                <div class="col-12 mt-4">
+                  <button type="submit" class="btn btn-success w-100 fw-bold py-3 rounded-pill shadow">
+                    <i class="fa-solid fa-paper-plane me-2"></i> Submit Pre-Registration
+                  </button>
+                </div>
+              </div>
+            </form>
+          </div>
+        </div>
+      </div>
+
+    </div>
+  </section>
+
+  <!-- Animated Video Section -->
+  <section class="py-5 bg-light">
+    <div class="container">
+      <div class="text-center mb-5" data-aos="fade-up">
+        <span class="badge bg-success text-white px-3 py-2 rounded-pill fw-bold mb-2">INSIDE OUR CLASSROOMS & ACTIVITIES</span>
+        <h2 class="display-6 fw-extrabold text-success">Experience Learning at Eagles Academy</h2>
+        <p class="text-muted">Watch our practical teaching sessions, student showcases, and vibrant campus activities.</p>
+      </div>
+
+      <div class="row g-4">
+        
+        <!-- Video 1: Featured Teaching Session -->
+        <div class="col-lg-4 col-md-6" data-aos="zoom-in" data-aos-delay="100">
+          <div class="video-card">
+            <div class="video-inner">
+              <div class="video-wrapper">
+                <!-- Replace src with your YouTube/Local Video Embed -->
+                <iframe src="assets/img/vid3.mp4" title="Interactive Classroom Teaching Session" allowfullscreen></iframe>
+              </div>
+              <div class="p-3">
+                <span class="badge bg-danger mb-2">FEATURED CLASSROOM</span>
+                <h5 class="fw-bold fs-6 mb-1">Interactive Teaching Session in Progress</h5>
+                <p class="text-muted small mb-0">Observe our highly engaging teacher-student dynamic and skill-focused learning techniques.</p>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Video 2 -->
+        <div class="col-lg-4 col-md-6" data-aos="zoom-in" data-aos-delay="200">
+          <div class="video-card">
+            <div class="video-inner">
+              <div class="video-wrapper">
+                <iframe src="assets/img/vide2.mp4" title="Celebrating Nigeria at 66" allowfullscreen></iframe>
+              </div>
+              <div class="p-3">
+                <span class="badge bg-primary mb-2">Cultivating the Leaders of Tomorrow! 🦅</span>
+                <h5 class="fw-bold fs-6 mb-1">“Raising Future Giants for a Greater Nigeria.” 💚🤍💚</h5>
+                <p class="text-muted small mb-0">At Eagles Academy, we believe that true nation-building starts in the classroom. Watch our talented pupils honor Nigeria’s rich heritage, diversity, and promise through culture, presentations, and patriotic performances during our Independence Day celebration.
+
+
+
+📍 Eagles Academy, Aso Pada, Mararaba</p>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Video 3 -->
+        <div class="col-lg-4 col-md-6" data-aos="zoom-in" data-aos-delay="300">
+          <div class="video-card">
+            <div class="video-inner">
+              <div class="video-wrapper">
+                <iframe src="assets/img/vide1.mp4" title="💚🤍💚 Future Leaders, Bright Dreams & Patriotic Hearts!" allowfullscreen></iframe>
+              </div>
+              <div class="p-3">
+                <span class="badge bg-warning text-dark mb-2">ANNUAL EVENTS</span>
+                <h5 class="fw-bold fs-6 mb-1">Nigeria @66 Highlights</h5>
+                <p class="text-muted small mb-0">Here’s a peek into how our amazing pupils at Eagles Academy celebrated Nigeria’s Independence Day! From cultural showcases to inspiring presentations, our children are learning to build a better nation through creativity and excellence. 🇳🇬✨</p>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Video 4 -->
+        <div class="col-lg-4 col-md-6" data-aos="zoom-in" data-aos-delay="100">
+          <div class="video-card">
+            <div class="video-inner">
+              <div class="video-wrapper">
+                <iframe src="assets/img/vid2.mp4" title="Safe and Inspiring Environment" allowfullscreen></iframe>
+              </div>
+              <div class="p-3">
+                <span class="badge bg-success mb-2">🏫 Where Leaders Grow</span>
+                <h5 class="fw-bold fs-6 mb-1">School Environment</h5>
+                <p class="text-muted small mb-0">Take a step inside Eagles Academy, Aso Pada! From our well-ventilated, serene classrooms and modern learning spaces to our vibrant play fields, we provide a safe, structured, and conducive environment designed to spark curiosity and nurture your child's full potential. 🌟.</p>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Video 5 -->
+        <div class="col-lg-4 col-md-6" data-aos="zoom-in" data-aos-delay="200">
+          <div class="video-card">
+            <div class="video-inner">
+              <div class="video-wrapper">
+                <iframe src="assets/img/vid7.mp4" title="Official Launch of Our Playground!" allowfullscreen></iframe>
+              </div>
+              <div class="p-3">
+                <span class="badge bg-info text-dark mb-2">Learning goes beyond the classroom! 🥳</span>
+                <h5 class="fw-bold fs-6 mb-1">School Playground</h5>
+                <p class="text-muted small mb-0">We are thrilled to launch our new campus playground designed to foster teamwork, outdoor exercise, and endless laughter for our young eagles. Watch our pupils take their first steps onto the new play equipment! 🦅💚</p>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Video 6 -->
+        <div class="col-lg-4 col-md-6" data-aos="zoom-in" data-aos-delay="300">
+          <div class="video-card">
+            <div class="video-inner">
+              <div class="video-wrapper">
+                <iframe src="assets/img/vid1.mp4" title="Shaping Tomorrow’s Leaders: Inside Our Secondary School Session" allowfullscreen></iframe>
+              </div>
+              <div class="p-3">
+                <span class="badge bg-dark mb-2">🏛️ Academic Excellence & Skill-Based Learning</span>
+                <h5 class="fw-bold fs-6 mb-1">Our learning Space</h5>
+                <p class="text-muted small mb-0">At Eagles Academy Secondary School, we bridge theory with practical application. Take a look at our dedicated subject teachers in action as they mentor students toward academic success, moral integrity, and real-world creativity.</p>
+              </div>
+            </div>
+          </div>
+        </div>
+
+      </div>
+    </div>
+  </section>
+
+  <!-- News / Director Commentary Poster Card Section -->
+  <section class="py-5">
+    <div class="container">
+      <div class="news-poster-card" data-aos="fade-up">
+        <div class="news-poster-header">
+          <span class="badge bg-warning text-dark fw-bold px-3 py-1 rounded-pill mb-2">SPECIAL PRESS RELEASE & VISION</span>
+          <h2 class="fw-extrabold mb-2">Education: Eagles Academy Director, Dr. Maiyanga Expresses Concern Over Lack of Proper Public-Private-Partnership</h2>
+          <p class="text-light opacity-75 mb-0"><i class="fa-solid fa-newspaper me-2"></i> Delivered at the Eagles Academy Annual Speech and Prize Giving Day</p>
+        </div>
+
+        <div class="news-body">
+          <p>The Director, Eagles Academy, Aso Pada, Karu Local Government Area of Nasarawa State, <strong>Dr. Alex Maiyanga</strong>, has expressed dismay over lack of proper framework for a Public Private Partnership (PPP) initiative in Nigeria’s education sector.</p>
+
+          <p>He said, whereas, there is the Bank of Industry and Bank of Agriculture among others, the government has never deemed it necessary to have bank of education.</p>
+
+          <div class="quote-box">
+            <p class="mb-0 fw-bold text-dark">
+              "The government should have formed a bank instead of establishing the Nigerian Education Loan Fund (NELFUND) scheme so that willing students can take loans."
+            </p>
+          </div>
+
+          <p>Dr. Maiyanga, who spoke to the media at the sidelines of Eagles Academy Annual Speech and Prize Giving Day, noted that the government hardly assist private initiative but seems to be even envious of private sector contribution to educational development.</p>
+
+          <p>He stressed that it is unfortunate that the government is not partnering in education with the private sector leaving them to raise capital from individual sweat. Dr. Maiyanga pointed out that private schools rather than being helped receive numerous forms of taxes from various organizations even as some have become scammers.</p>
+
+          <p>He also spoke about the education policy of Finland where creativity and skills are emphasized rather stressing much on paper certification.</p>
+
+          <div class="quote-box">
+            <p class="mb-0 fw-bold text-dark">
+              "The students are taught from the initial stage of their education to be creative, to innovate, to use skills rather building them for raw memory, to just regurgitate what they have been taught."
+            </p>
+          </div>
+
+          <p class="mb-0">He noted that Nigeria should learn and borrow from best practices around the world, even as the United States borrows from Finland saying that is the best way to go.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Added Value: Requirements Checklist -->
+  <section class="py-5 bg-light">
+    <div class="container">
+      <div class="row g-4 align-items-center">
+        <div class="col-lg-6" data-aos="fade-right">
+          <h3 class="fw-bold text-success mb-3">Admission Requirements Checklist</h3>
+          <p class="text-muted mb-4">When visiting the school environment to submit application forms, please bring along the following documents:</p>
+          
+          <ul class="list-unstyled d-flex flex-column gap-3">
+            <li class="d-flex align-items-center gap-3">
+              <i class="fa-solid fa-circle-check text-success fs-4"></i>
+              <span>2 Recent Passport Photographs of the Child</span>
+            </li>
+            <li class="d-flex align-items-center gap-3">
+              <i class="fa-solid fa-circle-check text-success fs-4"></i>
+              <span>Copy of Birth Certificate or Statutory Declaration of Age</span>
+            </li>
+            <li class="d-flex align-items-center gap-3">
+              <i class="fa-solid fa-circle-check text-success fs-4"></i>
+              <span>Last Academic Result / Report Card from Previous School</span>
+            </li>
+            <li class="d-flex align-items-center gap-3">
+              <i class="fa-solid fa-circle-check text-success fs-4"></i>
+              <span>Medical Fitness Certificate / Immunization Record</span>
+            </li>
+          </ul>
+        </div>
+        <div class="col-lg-6 text-center" data-aos="fade-left">
+          <div class="p-4 bg-white rounded-4 shadow-sm border">
+            <i class="fa-solid fa-graduation-cap display-1 text-success mb-3"></i>
+            <h4 class="fw-bold">Ready to Join Our Giant Steps?</h4>
+            <p class="text-muted small">Our administrative desk is open every weekday from 8am to 3pm to receive your application.</p>
+            <a href="tel:+2348076166900" class="btn btn-warning fw-bold px-4 py-2 rounded-pill mt-2">
+              <i class="fa-solid fa-phone me-2"></i> Call Admission Office Now
+            </a>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Footer -->
+  <footer>
+    <div class="container text-center">
+      <p class="mb-1">&copy; All Rights Reserved. Eagles Academy Aso Pada.</p>
+      <p class="small text-secondary mb-0">Raising Future Giants Through Quality & Practical Education</p>
+    </div>
+  </footer>
+
+  <!-- Scripts -->
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
+  <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
+  <script>
+    document.addEventListener('DOMContentLoaded', function () {
+      AOS.init({ duration: 900, once: true });
+    });
+
+    function submitEnrollment(e) {
+      e.preventDefault();
+      alert('Thank you! Your pre-registration details have been submitted. Our admission team will contact you shortly.');
+      document.getElementById('enrollForm').reset();
+    }
+  </script>
+</body>
+</html>

@@ -1,0 +1,545 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>About Us | Eagles Academy Aso Pada</title>
+
+  <!-- Favicon -->
+  <link rel="shortcut icon" href="assets/img/eimgg.jpg" type="image/x-icon">
+
+  <!-- Bootstrap 5 CSS -->
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
+  <!-- Font Awesome 6 Icons -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css">
+  <!-- Google Fonts -->
+  <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+  <!-- AOS Animation Library -->
+  <link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet">
+
+  <style>
+    :root {
+      --primary-color: #1E5631; /* School Primary Green */
+      --secondary-color: #D9534F; /* Crimson Accent */
+      --accent-color: #F4B41A; /* Academic Gold */
+      --dark-text: #2B2D42;
+      --light-bg: #F8F9FA;
+    }
+
+    body {
+      font-family: 'Plus Jakarta Sans', sans-serif;
+      color: var(--dark-text);
+      overflow-x: hidden;
+      background-color: #FCFDFD;
+    }
+
+    /* Navigation Bar */
+    .top-bar {
+      background-color: var(--primary-color);
+      color: #ffffff;
+      font-size: 0.875rem;
+      padding: 8px 0;
+    }
+
+    .navbar {
+      box-shadow: 0 4px 15px rgba(0,0,0,0.05);
+      background: #ffffff;
+      padding: 12px 0;
+      transition: all 0.3s ease;
+    }
+    
+    .navbar.scrolled {
+      padding: 8px 0;
+      box-shadow: 0 6px 20px rgba(0,0,0,0.1);
+    }
+
+    .brand-title {
+      font-weight: 800;
+      color: var(--primary-color);
+      line-height: 1.1;
+      font-size: 1.15rem;
+    }
+    .brand-sub {
+      color: var(--secondary-color);
+      font-size: 0.8rem;
+      letter-spacing: 1px;
+    }
+
+    /* Page Header */
+    .page-header {
+      background: linear-gradient(rgba(15, 45, 25, 0.85), rgba(15, 45, 25, 0.85)), url('assets/img/46.jpg');
+      background-size: cover;
+      background-position: center;
+      color: white;
+      padding: 80px 0 60px;
+      text-align: center;
+    }
+
+    /* 1. Vision & Mission Section */
+    .vision-card {
+      background: linear-gradient(135deg, rgba(30, 86, 49, 0.92), rgba(15, 45, 25, 0.95)), url('assets/img/61.jpg');
+      background-size: cover;
+      background-position: center;
+      color: #ffffff;
+      border-radius: 20px;
+      padding: 40px;
+      box-shadow: 0 15px 35px rgba(30, 86, 49, 0.2);
+      height: 100%;
+      position: relative;
+      overflow: hidden;
+      border: 2px solid var(--accent-color);
+    }
+
+    .mission-card {
+      background: linear-gradient(135deg, rgba(217, 83, 79, 0.92), rgba(140, 30, 30, 0.95)), url('assets/img/62.jpg');
+      background-size: cover;
+      background-position: center;
+      color: #ffffff;
+      border-radius: 20px;
+      padding: 40px;
+      box-shadow: 0 15px 35px rgba(217, 83, 79, 0.2);
+      height: 100%;
+      position: relative;
+      overflow: hidden;
+      border: 2px solid #ffffff;
+    }
+
+    .card-icon-badge {
+      width: 65px;
+      height: 65px;
+      background: rgba(255, 255, 255, 0.2);
+      backdrop-filter: blur(5px);
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 1.8rem;
+      margin-bottom: 20px;
+    }
+
+    /* 2. History Section with Background */
+    .history-section {
+      position: relative;
+      background: linear-gradient(rgba(255, 255, 255, 0.92), rgba(255, 255, 255, 0.92)), url('assets/img/23.jpg');
+      background-size: cover;
+      background-attachment: fixed;
+      background-position: center;
+    }
+
+    .history-text {
+      font-size: 1.02rem;
+      line-height: 1.8;
+      color: #333333;
+    }
+
+    /* Core Values Poster Card (Sidebar) */
+    .core-values-poster {
+      background: linear-gradient(145deg, #F4B41A 0%, #D9534F 50%, #1E5631 100%);
+      border-radius: 24px;
+      padding: 35px 25px;
+      color: #ffffff;
+      box-shadow: 0 20px 40px rgba(0,0,0,0.25);
+      position: sticky;
+      top: 100px;
+      border: 3px solid #ffffff;
+      transition: transform 0.4s ease;
+    }
+
+    .core-values-poster:hover {
+      transform: translateY(-8px) scale(1.02);
+    }
+
+    .value-item {
+      background: rgba(255, 255, 255, 0.15);
+      backdrop-filter: blur(8px);
+      border-radius: 12px;
+      padding: 12px 16px;
+      margin-bottom: 12px;
+      font-weight: 600;
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      border-left: 4px solid #ffffff;
+    }
+
+    /* 3. Director's Note Section */
+    .director-card {
+      background: linear-gradient(rgba(15, 45, 25, 0.88), rgba(15, 45, 25, 0.94)), url('assets/img/dr.jpg');
+      background-size: cover;
+      background-position: center;
+      color: #ffffff;
+      border-radius: 24px;
+      padding: 50px;
+      box-shadow: 0 15px 35px rgba(0,0,0,0.15);
+    }
+
+    /* 4. Proprietress Desk Section */
+    .proprietress-card {
+      background: #ffffff;
+      border-radius: 24px;
+      padding: 50px;
+      box-shadow: 0 12px 30px rgba(0,0,0,0.06);
+      border-top: 6px solid var(--secondary-color);
+    }
+
+    .highlight-badge {
+      background: #FFF8E7;
+      border: 1px solid var(--accent-color);
+      border-radius: 12px;
+      padding: 15px 20px;
+      margin-top: 15px;
+    }
+
+    /* Footer */
+    footer {
+      background: #111;
+      color: #bbb;
+      padding-top: 60px;
+      padding-bottom: 30px;
+    }
+    footer h5 { color: #fff; font-weight: 700; margin-bottom: 20px; }
+    footer a { color: #bbb; text-decoration: none; }
+    footer a:hover { color: #fff; }
+  </style>
+</head>
+<body>
+
+  <!-- Top Bar -->
+  <div class="top-bar d-none d-md-block">
+    <div class="container d-flex justify-content-between align-items-center">
+      <div>
+        <i class="fa-solid fa-envelope me-2"></i> eaglesacademy1@gmail.com
+        <span class="mx-3">|</span>
+        <i class="fa-solid fa-phone me-2"></i> +234 807 616 6900, +234 814 022 9663
+      </div>
+      <div>
+        <i class="fa-solid fa-location-dot me-2"></i> Aso Pada, Mararaba, Nasarawa State
+      </div>
+    </div>
+  </div>
+
+  <!-- Navbar -->
+  <nav class="navbar navbar-expand-lg sticky-top" id="mainNavbar">
+    <div class="container">
+      <a class="navbar-brand d-flex align-items-center" href="index.html">
+        <img src="assets/img/eimgg.jpg" alt="Logo" height="48" class="me-2 rounded-circle">
+        <div>
+          <div class="brand-title">EAGLES ACADEMY</div>
+          <div class="brand-sub">ASO PADA</div>
+        </div>
+      </a>
+      <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#mainNav">
+        <span class="navbar-toggler-icon"></span>
+      </button>
+      <div class="collapse navbar-collapse" id="mainNav">
+        <ul class="navbar-nav ms-auto fw-semibold">
+          <li class="nav-item"><a class="nav-link" href="index.html">HOME</a></li>
+          <li class="nav-item"><a class="nav-link active" href="about.html">ABOUT US</a></li>
+          <li class="nav-item"><a class="nav-link" href="student-activities.html">STUDENT ACTIVITIES</a></li>
+          <li class="nav-item"><a class="nav-link" href="gallery.html">GALLERY</a></li>
+          <li class="nav-item"><a class="nav-link" href="contact.html">CONTACT</a></li>
+        </ul>
+      </div>
+    </div>
+  </nav>
+
+  <!-- Page Header -->
+  <section class="page-header">
+    <div class="container">
+      <span class="badge bg-warning text-dark px-3 py-2 rounded-pill fw-bold mb-2">WHO WE ARE</span>
+      <h1 class="display-4 fw-extrabold text-white">About Eagles Academy Aso Pada</h1>
+      <p class="lead text-light mb-0">Discover our rich history, leadership vision, and unwavering commitment to academic excellence.</p>
+    </div>
+  </section>
+
+  <!-- 1. Vision & Mission Cards -->
+  <section class="py-5">
+    <div class="container">
+      <div class="row g-4">
+        <!-- Vision Card -->
+        <div class="col-lg-6" data-aos="fade-right">
+          <div class="vision-card">
+            <div class="card-icon-badge text-warning">
+              <i class="fa-solid fa-eye"></i>
+            </div>
+            <span class="badge bg-warning text-dark fw-bold mb-2">OUR VISION</span>
+            <h3 class="fw-bold mb-3 text-white">Inspiring Lifelong Learning</h3>
+            <p class="fs-5 leading-relaxed text-light mb-0">
+              "To prepare learners that will love to learn throughout life and pass all examinations within the range/level they find themselves."
+            </p>
+          </div>
+        </div>
+
+        <!-- Mission Card -->
+        <div class="col-lg-6" data-aos="fade-left">
+          <div class="mission-card">
+            <div class="card-icon-badge text-white">
+              <i class="fa-solid fa-bullseye"></i>
+            </div>
+            <span class="badge bg-light text-danger fw-bold mb-2">OUR MISSION</span>
+            <h3 class="fw-bold mb-3 text-white">Global Analytical Minds</h3>
+            <p class="fs-5 leading-relaxed text-light mb-0">
+              "Creating in our learners analytical minds through modern education and educating for international participation in all human endeavors."
+            </p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- 2. Brief History & Core Values Poster -->
+  <section class="history-section py-5">
+    <div class="container">
+      <div class="row g-5">
+        <!-- History Content Left Column -->
+        <div class="col-lg-8" data-aos="fade-up">
+          <span class="badge bg-success px-3 py-2 rounded-pill fw-bold mb-2">OUR HERITAGE</span>
+          <h2 class="fw-bold text-success mb-4">Brief History of Eagles Academy Aso Pada (EAAP)</h2>
+
+          <div class="history-text">
+            <p>
+              The inspiration to found <strong>Eagles Academy Aso Pada</strong> came in 2012 when the Executive Director, <strong>Dr. Alex A. Maiyanga mni</strong>, and the Proprietress, <strong>Mrs. Victoria J. Maiyanga</strong>, saw the need to establish a world-class institution that would deliver the best standard of education to the Nigerian child at the sub-degree level.
+            </p>
+            <p>
+              The school started its operations in <strong>August 2013</strong> with a ‘summer school’ which lasted for a month. Following that, the school was dedicated on Thursday, 5th September 2013 by Pastor Gideon Oyedepo, a Senior Pastor of Living Faith Church (AKA Winners’ Chapel), Life Camp, Abuja.
+            </p>
+            <p>
+              <strong>Monday, 9th September 2013</strong> brought a new dawn in private education social enterprise in Nigeria. Thus, full academic activities flagged off with state-of-the-art facilities for teaching/learning activities in Aso Pada, Nasarawa State. From day one, the library, staff offices, furniture, playground, and a computer laboratory were readily on ground.
+            </p>
+
+            <div class="p-3 bg-light rounded-3 border-start border-4 border-success my-4 shadow-sm">
+              <h6 class="fw-bold text-success mb-2"><i class="fa-solid fa-users-gear me-2"></i>Pioneer Academic Staff</h6>
+              <p class="mb-0 small text-secondary">
+                Mrs. Oluwakemi A. Makinwa (Pioneer Head Facilitator), Mr. Stephen Egbadekwu (Pioneer Assistant Head Facilitator), Mr. Abraham A. Adebote, Miss Mary A. Adeyinka, Mrs. Vera Ozoilo, and Miss Moses Patience Ako.
+              </p>
+            </div>
+
+            <p>
+              On the first day of resumption, eleven (11) learners were enrolled. However, Eagles Academy Aso Pada enrolled twenty-eight (28) learners at the end of the First Term 2013/2014 Academic Session.
+            </p>
+            <p>
+              Presently, Eagles Academy Aso Pada has grown rapidly through the help of Almighty God and the support of her members of staff. In September 2016, after three years of intense academic work, the Junior Secondary School started off with our first set of learners who were enrolled at the time of establishment. The secondary school learners and the pioneering staff didn’t relent in their efforts as the students were ever ready to face challenges that come with college life.
+            </p>
+            <p>
+              Not resting on her oars, Eagles Academy Aso Pada added another feather to its cap by establishing a full-fledged secondary school whose building was completed in 2020. The secondary school building is a masterpiece of architectural design which is fully furnished with laboratories for Physics, Biology, Chemistry, and Agricultural Sciences. The computer laboratory is also equipped with computer pieces that give all students hands-on experience.
+            </p>
+            <p class="fw-semibold text-dark">
+              Further advancements were recorded when in <strong>November 2022</strong>, Eagles Academy Aso Pada was fully accredited and registered as WAEC and NECO Examination Centers for the senior secondary school cadre. All these garlands were achieved within the first decade of the life of Eagles Academy Aso Pada to the glory of the giver of all good gifts, God the creator.
+            </p>
+          </div>
+        </div>
+
+        <!-- Core Values Poster Card Right Column -->
+        <div class="col-lg-4" data-aos="zoom-in" data-aos-delay="200">
+          <div class="core-values-poster">
+            <div class="text-center mb-4">
+              <i class="fa-solid fa-gem fs-1 text-warning mb-2"></i>
+              <h3 class="fw-extrabold text-white mb-0">CORE VALUES</h3>
+              <p class="small text-light opacity-75">The Pillars of Eagles Academy</p>
+            </div>
+
+            <div class="value-item">
+              <i class="fa-solid fa-check-circle text-warning"></i>
+              <span>Building our human capacity today for tomorrow</span>
+            </div>
+            <div class="value-item">
+              <i class="fa-solid fa-book-open text-warning"></i>
+              <span>Teaching learners to love to learn</span>
+            </div>
+            <div class="value-item">
+              <i class="fa-solid fa-heart-pulse text-warning"></i>
+              <span>Developing the body, soul, and mind</span>
+            </div>
+            <div class="value-item">
+              <i class="fa-solid fa-hands-praying text-warning"></i>
+              <span>Discipline with love and fear of God</span>
+            </div>
+            <div class="value-item">
+              <i class="fa-solid fa-lightbulb text-warning"></i>
+              <span>Teaching to provoke creativity</span>
+            </div>
+            <div class="value-item">
+              <i class="fa-solid fa-laptop-code text-warning"></i>
+              <span>Preparing learners to dominate the IT world</span>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- 3. Director's Note -->
+  <section class="py-5">
+    <div class="container">
+      <div class="director-card" data-aos="fade-up">
+        <div class="row align-items-center">
+          <div class="col-lg-12">
+            <div class="d-flex align-items-center mb-4">
+              <div class="bg-warning text-dark p-3 rounded-circle me-3">
+                <i class="fa-solid fa-user-tie fs-2"></i>
+              </div>
+              <div>
+                <span class="badge bg-warning text-dark fw-bold mb-1">DIRECTOR'S NOTE</span>
+                <h3 class="fw-bold text-white mb-0">From the Executive Director</h3>
+              </div>
+            </div>
+
+            <div class="text-light leading-relaxed fs-6">
+              <p>Dear all,</p>
+              <p>I welcome you all to our site with unquantifiable humility and unquenchable gratitude to the creator.</p>
+              <p>
+                Eagles Academy Aso Pada is founded on the belief that in this wide world, one can put a dot in it and it will be ascribed to one in posterity. As Neil Armstrong was quoted to have said, <em>“It is one small step for a man and giant leap for mankind”</em>; so is our little step in social entrepreneurship in education. Therefore, Eagles Academy Aso Pada is a small step that will impact our world through our learners.
+              </p>
+              <p>
+                The Nigerian education is in shambles and we needed to change the narrative by establishing a world-class institution at the sub-degree level. Eagles Academy is therefore a model in the provisions of infrastructure and in the quality of our staffers. To us, quality is not an act but a habit, a culture.
+              </p>
+              <p>
+                Along with known philosopher kings, we desire to be the change we wish to see in education in Nigeria. According to Aristotle, it is a mark of an educated mind to be able to entertain thought without accepting it. Thus, we say that we do not accept the way education is handled in Nigeria and we have the onus to change the direction by establishing a model institution called Eagles Academy Aso Pada.
+              </p>
+              <p>
+                Our vision for the future is the deployment of Information and Communication Technology (ICT) in our classroom facilitations, deliveries, and interactions. Barring our location, all our facilitators are made to have hands-on experience in computer applications for classroom deliveries.
+              </p>
+              <p>
+                Our gratitude is to GOD who ordered our steps packaged with wisdom to contribute a little to the challenge of unemployment in our country. We are thankful to our parents/guardians and the host community for their wonderful support. The academic and administrative staffers deserve a special place in my mind.
+              </p>
+              
+              <div class="mt-4 pt-3 border-top border-secondary d-flex justify-content-between align-items-center flex-wrap gap-3">
+                <div>
+                  <h5 class="fw-bold text-warning mb-0">DR. ALEX A. MAIYANGA <span class="fs-6 fw-normal text-light">(mni)</span></h5>
+                  <p class="small text-light mb-0">NCE; BA (Hons); MA; M.Phil; PhD; rtn</p>
+                  <p class="small text-warning fw-semibold mb-0">Director / CEO, Eagles Academy Aso Pada</p>
+                </div>
+                <span class="badge bg-success px-4 py-2 rounded-pill fs-6 fw-bold">Eagles CEO Office</span>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- 4. Proprietress Desk Section -->
+  <section class="py-5 bg-light" id="proprietress">
+    <div class="container">
+      <div class="proprietress-card" data-aos="fade-up">
+        <div class="row g-4 align-items-center">
+          <div class="col-lg-12">
+            <div class="d-flex align-items-center mb-4">
+              <div class="bg-danger text-white p-3 rounded-circle me-3">
+                <i class="fa-solid fa-hands-holding-child fs-2"></i>
+              </div>
+              <div>
+                <span class="badge bg-danger px-3 py-2 rounded-pill fw-bold">LEADERSHIP MESSAGE</span>
+                <h3 class="fw-bold text-success mb-0 mt-1">From the Proprietress Desk</h3>
+              </div>
+            </div>
+
+            <div class="text-secondary leading-relaxed">
+              <p>
+                It is with deep thanks to God to be alive to be called a Proprietress of this great institution called Eagles Academy. It is not because I am qualified but the grace of God has enabled me. To God alone be all the glory.
+              </p>
+              <p>
+                The inspiration is not sole but a combination of ideas of my husband and I. Indeed, the inspiration was that of my husband who is an Educationist and an administrator par excellence. The drive also came from the idea of giving back to the society that made us educated, along with the effort to stamp our feet on the sands of time in the education industry.
+              </p>
+              <p>
+                The success of the school is achieved through God’s wisdom, God’s leading, proper planning, hard work, and prudent resource management.
+              </p>
+
+              <!-- Highlighted School Features Card -->
+              <div class="highlight-badge my-4">
+                <h6 class="fw-bold text-dark mb-3"><i class="fa-solid fa-star text-warning me-2"></i>Key Infrastructure & Care Measures Provided:</h6>
+                <div class="row g-3">
+                  <div class="col-md-6">
+                    <div class="d-flex align-items-start gap-2">
+                      <i class="fa-solid fa-video text-danger mt-1"></i>
+                      <span><strong>24/7 CCTV Monitoring:</strong> Cameras in all classrooms monitored globally.</span>
+                    </div>
+                  </div>
+                  <div class="col-md-6">
+                    <div class="d-flex align-items-start gap-2">
+                      <i class="fa-solid fa-solar-panel text-warning mt-1"></i>
+                      <span><strong>24-Hour Solar Power:</strong> Uninterrupted electricity for smooth learning.</span>
+                    </div>
+                  </div>
+                  <div class="col-md-6">
+                    <div class="d-flex align-items-start gap-2">
+                      <i class="fa-solid fa-people-roof text-success mt-1"></i>
+                      <span><strong>Class Assistants:</strong> Nursery section facilitators have assistants for optimal care.</span>
+                    </div>
+                  </div>
+                  <div class="col-md-6">
+                    <div class="d-flex align-items-start gap-2">
+                      <i class="fa-solid fa-flask text-primary mt-1"></i>
+                      <span><strong>Standard Laboratories:</strong> Science and Computer suites for practical mastery.</span>
+                    </div>
+                  </div>
+                </div>
+              </div>
+
+              <p>
+                We have provided a conducive environment for learning with standard classrooms, a well-stocked Library, standard Science Laboratories, and a well-equipped Computer Laboratory. The intention is to continue to improve our facilities and elevate teaching and learning.
+              </p>
+
+              <div class="mt-4 pt-3 border-top d-flex justify-content-between align-items-center flex-wrap">
+                <div>
+                  <h5 class="fw-bold text-success mb-0">DEACONESS V.J. MAIYANGA</h5>
+                  <p class="text-danger fw-bold mb-0">Proprietress, Eagles Academy Aso Pada</p>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Footer -->
+  <footer>
+    <div class="container">
+      <div class="row g-4 mb-4">
+        <div class="col-lg-4">
+          <h5 class="text-white">Eagles Academy Aso Pada</h5>
+          <p>No. 42, Eagles Academy Road, Aso Pada, Mararaba, Nasarawa State, Nigeria.</p>
+          <p class="mb-1"><i class="fa-solid fa-phone me-2"></i> +234 807 616 6900, +234 814 022 9663</p>
+          <p><i class="fa-solid fa-envelope me-2"></i> eaglesacademy1@gmail.com</p>
+        </div>
+        <div class="col-lg-2">
+          <h5 class="text-white">Quick Links</h5>
+          <ul class="list-unstyled">
+            <li class="mb-2"><a href="index.html">Home</a></li>
+            <li class="mb-2"><a href="about.html">About Us</a></li>
+            <li class="mb-2"><a href="student-activities.html">Student Activities</a></li>
+            <li class="mb-2"><a href="gallery.html">Gallery</a></li>
+          </ul>
+        </div>
+        <div class="col-lg-6 text-lg-end">
+          <h5 class="text-white">School Motto</h5>
+          <p class="fst-italic text-warning fs-4 fw-bold">"Raising Future Giants"</p>
+        </div>
+      </div>
+      <hr class="border-secondary">
+      <div class="text-center pt-2">
+        <p class="mb-0">&copy; All Rights Reserved. Eagles Academy Aso Pada.</p>
+      </div>
+    </div>
+  </footer>
+
+  <!-- Scripts -->
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
+  <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
+  <script>
+    document.addEventListener('DOMContentLoaded', function () {
+      AOS.init({ duration: 900, once: true });
+
+      const navbar = document.getElementById('mainNavbar');
+      window.addEventListener('scroll', function () {
+        if (window.scrollY > 50) {
+          navbar.classList.add('scrolled');
+        } else {
+          navbar.classList.remove('scrolled');
+        }
+      });
+    });
+  </script>
+</body>
+</html>

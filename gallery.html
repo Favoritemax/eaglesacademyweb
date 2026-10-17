@@ -1,0 +1,772 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Gallery | Eagles Academy Aso Pada</title>
+
+  <!-- Favicon -->
+  <link rel="shortcut icon" href="assets/img/eimgg.jpg" type="image/x-icon">
+
+  <!-- Bootstrap 5 CSS -->
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
+  <!-- Font Awesome 6 Icons -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css">
+  <!-- Google Fonts -->
+  <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+  <!-- AOS Animation Library -->
+  <link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet">
+
+  <style>
+    :root {
+      --primary-color: #1E5631; /* School Primary Green */
+      --secondary-color: #D9534F; /* Crimson Accent */
+      --accent-color: #F4B41A; /* Academic Gold */
+      --dark-text: #2B2D42;
+      --light-bg: #F8F9FA;
+    }
+
+    body {
+      font-family: 'Plus Jakarta Sans', sans-serif;
+      color: var(--dark-text);
+      background-color: #FCFDFD;
+      overflow-x: hidden;
+    }
+
+    /* Top Bar & Navbar */
+    .top-bar {
+      background-color: var(--primary-color);
+      color: #ffffff;
+      font-size: 0.875rem;
+      padding: 8px 0;
+    }
+
+    .navbar {
+      box-shadow: 0 4px 15px rgba(0,0,0,0.05);
+      background: #ffffff;
+      padding: 12px 0;
+      transition: all 0.3s ease;
+    }
+    
+    .navbar.scrolled {
+      padding: 8px 0;
+      box-shadow: 0 6px 20px rgba(0,0,0,0.1);
+    }
+
+    .brand-title {
+      font-weight: 800;
+      color: var(--primary-color);
+      line-height: 1.1;
+      font-size: 1.15rem;
+    }
+    .brand-sub {
+      color: var(--secondary-color);
+      font-size: 0.8rem;
+      letter-spacing: 1px;
+    }
+
+    /* Page Header */
+    .page-header {
+      background: linear-gradient(rgba(15, 45, 25, 0.88), rgba(15, 45, 25, 0.88)), url('assets/img/10.jpg');
+      background-size: cover;
+      background-position: center;
+      color: white;
+      padding: 80px 0 60px;
+      text-align: center;
+    }
+
+    /* Gallery Filter Nav */
+    .gallery-filter-btn {
+      border: 2px solid #E2E8F0;
+      background: #ffffff;
+      color: var(--dark-text);
+      font-weight: 600;
+      padding: 10px 24px;
+      border-radius: 50px;
+      margin: 5px;
+      transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+      cursor: pointer;
+    }
+
+    .gallery-filter-btn:hover,
+    .gallery-filter-btn.active {
+      background: var(--primary-color);
+      color: #ffffff;
+      border-color: var(--primary-color);
+      box-shadow: 0 8px 20px rgba(30, 86, 49, 0.25);
+      transform: translateY(-2px);
+    }
+
+    /* Bento-style Colorful Gallery Grid */
+    .gallery-card {
+      position: relative;
+      border-radius: 20px;
+      overflow: hidden;
+      box-shadow: 0 10px 25px rgba(0,0,0,0.08);
+      height: 320px;
+      cursor: pointer;
+      transition: transform 0.4s ease, box-shadow 0.4s ease;
+    }
+
+    .gallery-card.tall {
+      height: 420px;
+    }
+
+    .gallery-card img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      transition: transform 0.6s cubic-bezier(0.25, 1, 0.5, 1);
+    }
+
+    .gallery-card:hover {
+      transform: translateY(-8px);
+      box-shadow: 0 20px 35px rgba(0,0,0,0.18);
+    }
+
+    .gallery-card:hover img {
+      transform: scale(1.1);
+    }
+
+    /* Colorful Gradient Overlays on Hover */
+    .gallery-overlay {
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background: linear-gradient(180deg, rgba(0,0,0,0.1) 0%, rgba(30, 86, 49, 0.9) 100%);
+      opacity: 0;
+      display: flex;
+      flex-direction: column;
+      justify-content: flex-end;
+      padding: 25px;
+      transition: opacity 0.4s ease;
+    }
+
+    .gallery-card:nth-child(2n) .gallery-overlay {
+      background: linear-gradient(180deg, rgba(0,0,0,0.1) 0%, rgba(217, 83, 79, 0.92) 100%);
+    }
+
+    .gallery-card:nth-child(3n) .gallery-overlay {
+      background: linear-gradient(180deg, rgba(0,0,0,0.1) 0%, rgba(244, 180, 26, 0.95) 100%);
+    }
+
+    .gallery-card:hover .gallery-overlay {
+      opacity: 1;
+    }
+
+    .gallery-badge {
+      align-self: flex-start;
+      padding: 6px 14px;
+      background: rgba(255, 255, 255, 0.25);
+      backdrop-filter: blur(8px);
+      color: #ffffff;
+      border-radius: 30px;
+      font-size: 0.75rem;
+      font-weight: 700;
+      letter-spacing: 0.5px;
+      text-transform: uppercase;
+      margin-bottom: 10px;
+      border: 1px solid rgba(255, 255, 255, 0.4);
+    }
+
+    .gallery-title {
+      color: #ffffff;
+      font-weight: 700;
+      font-size: 1.25rem;
+      margin-bottom: 4px;
+    }
+
+    .gallery-caption {
+      color: rgba(255, 255, 255, 0.85);
+      font-size: 0.875rem;
+    }
+
+    .zoom-icon-badge {
+      position: absolute;
+      top: 20px;
+      right: 20px;
+      width: 44px;
+      height: 44px;
+      background: #ffffff;
+      color: var(--primary-color);
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 1.1rem;
+      box-shadow: 0 4px 12px rgba(0,0,0,0.15);
+      transform: scale(0);
+      transition: transform 0.3s ease 0.1s;
+    }
+
+    .gallery-card:hover .zoom-icon-badge {
+      transform: scale(1);
+    }
+
+    /* Lightbox Modal Custom Styles */
+    .modal-content {
+      background: transparent;
+      border: none;
+    }
+
+    .lightbox-img-wrapper {
+      position: relative;
+      background: rgba(0,0,0,0.85);
+      border-radius: 16px;
+      overflow: hidden;
+      box-shadow: 0 25px 50px rgba(0,0,0,0.5);
+    }
+
+    .lightbox-img-wrapper img {
+      width: 100%;
+      max-height: 80vh;
+      object-fit: contain;
+    }
+
+    .lightbox-caption-box {
+      background: #ffffff;
+      padding: 20px;
+      border-bottom-left-radius: 16px;
+      border-bottom-right-radius: 16px;
+    }
+
+    /* Footer */
+    footer {
+      background: #111;
+      color: #bbb;
+      padding-top: 60px;
+      padding-bottom: 30px;
+    }
+    footer h5 { color: #fff; font-weight: 700; margin-bottom: 20px; }
+    footer a { color: #bbb; text-decoration: none; }
+    footer a:hover { color: #fff; }
+  </style>
+</head>
+<body>
+
+  <!-- Top Bar -->
+  <div class="top-bar d-none d-md-block">
+    <div class="container d-flex justify-content-between align-items-center">
+      <div>
+        <i class="fa-solid fa-envelope me-2"></i> eaglesacademy1@gmail.com
+        <span class="mx-3">|</span>
+        <i class="fa-solid fa-phone me-2"></i> +234 807 616 6900, +234 814 022 9663
+      </div>
+      <div>
+        <i class="fa-solid fa-location-dot me-2"></i> Aso Pada, Mararaba, Nasarawa State
+      </div>
+    </div>
+  </div>
+
+  <!-- Navbar -->
+  <nav class="navbar navbar-expand-lg sticky-top" id="mainNavbar">
+    <div class="container">
+      <a class="navbar-brand d-flex align-items-center" href="index.html">
+        <img src="assets/img/eimgg.jpg" alt="Logo" height="48" class="me-2 rounded-circle">
+        <div>
+          <div class="brand-title">EAGLES ACADEMY</div>
+          <div class="brand-sub">ASO PADA</div>
+        </div>
+      </a>
+      <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#mainNav">
+        <span class="navbar-toggler-icon"></span>
+      </button>
+      <div class="collapse navbar-collapse" id="mainNav">
+        <ul class="navbar-nav ms-auto fw-semibold">
+          <li class="nav-item"><a class="nav-link" href="index.html">HOME</a></li>
+          <li class="nav-item"><a class="nav-link" href="about.html">ABOUT US</a></li>
+          <li class="nav-item"><a class="nav-link" href="student-activities.html">STUDENT ACTIVITIES</a></li>
+          <li class="nav-item"><a class="nav-link active" href="gallery.html">GALLERY</a></li>
+          <li class="nav-item"><a class="nav-link" href="contact.html">CONTACT</a></li>
+        </ul>
+      </div>
+    </div>
+  </nav>
+
+  <!-- Page Header -->
+  <section class="page-header">
+    <div class="container">
+      <span class="badge bg-warning text-dark px-3 py-2 rounded-pill fw-bold mb-2">CAMPUS IN PICTURES</span>
+      <h1 class="display-4 fw-extrabold text-white">Photo Gallery</h1>
+      <p class="lead text-light mb-0">Explore moments of learning, growth, innovation, and vibrant campus life at Eagles Academy Aso Pada.</p>
+    </div>
+  </section>
+
+  <!-- Filter Buttons Section -->
+  <section class="py-4 bg-white border-bottom">
+    <div class="container text-center">
+      <div class="d-flex flex-wrap justify-content-center gap-2" id="galleryFilters">
+        <button class="gallery-filter-btn active" data-filter="all">All Photos</button>
+        <button class="gallery-filter-btn" data-filter="campus">Campus & Facilities</button>
+        <button class="gallery-filter-btn" data-filter="academics">Academics & Labs</button>
+        <button class="gallery-filter-btn" data-filter="events">Events & Celebrations</button>
+        <button class="gallery-filter-btn" data-filter="sports">Sports & Recreation</button>
+      </div>
+    </div>
+  </section>
+
+  <!-- Gallery Grid Section -->
+  <section class="py-5">
+    <div class="container">
+      <div class="row g-4" id="galleryGrid">
+
+        <!-- Item 1: Secondary School Building -->
+        <div class="col-lg-4 col-md-6 gallery-item" data-category="campus" data-aos="fade-up">
+          <div class="gallery-card tall" onclick="openLightbox('assets/img/13.jpg', 'Architectural Masterpiece', 'Modern Senior Secondary School Complex completed in 2020')">
+            <img src="assets/img/13.jpg" alt="Secondary School Building">
+            <div class="zoom-icon-badge"><i class="fa-solid fa-expand"></i></div>
+            <div class="gallery-overlay">
+              <span class="gallery-badge">Campus & Facilities</span>
+              <h5 class="gallery-title">Secondary School Complex</h5>
+              <p class="gallery-caption">Completed with ultra-modern architectural standards.</p>
+            </div>
+          </div>
+        </div>
+
+        <!-- Item 2: Computer Laboratory -->
+        <div class="col-lg-4 col-md-6 gallery-item" data-category="campus" data-aos="fade-up" data-aos-delay="100">
+          <div class="gallery-card" onclick="openLightbox('assets/img/51.jpg', 'Computer Laboratory', 'Hands-on ICT sessions equipping students for digital dominance')">
+            <img src="assets/img/51.jpg" alt="Computer Lab">
+            <div class="zoom-icon-badge"><i class="fa-solid fa-expand"></i></div>
+            <div class="gallery-overlay">
+              <span class="gallery-badge">Academics & Labs</span>
+              <h5 class="gallery-title">ICT & Computer Suite</h5>
+              <p class="gallery-caption">Giving learners direct hands-on experience with technology.</p>
+            </div>
+          </div>
+        </div>
+
+        <!-- Item 3: Science Labs -->
+        <div class="col-lg-4 col-md-6 gallery-item" data-category="campus" data-aos="fade-up" data-aos-delay="200">
+          <div class="gallery-card" onclick="openLightbox('assets/img/49.jpg', 'Science Laboratories', 'WAEC & NECO accredited Physics, Chemistry, and Biology labs')">
+            <img src="assets/img/49.jpg" alt="Science Lab">
+            <div class="zoom-icon-badge"><i class="fa-solid fa-expand"></i></div>
+            <div class="gallery-overlay">
+              <span class="gallery-badge">Academics & Labs</span>
+              <h5 class="gallery-title">Science Laboratories</h5>
+              <p class="gallery-caption">Fully equipped laboratories for practical Physics, Chemistry, and Biology.</p>
+            </div>
+          </div>
+        </div>
+
+        <!-- Item 4: Playground & Recreation -->
+        <div class="col-lg-4 col-md-6 gallery-item" data-category="sports" data-aos="fade-up">
+          <div class="gallery-card" onclick="openLightbox('assets/img/36.jpg', 'Playground & Sports', 'Conducive recreational space fostering physical health and teamwork')">
+            <img src="assets/img/36.jpg" alt="Playground">
+            <div class="zoom-icon-badge"><i class="fa-solid fa-expand"></i></div>
+            <div class="gallery-overlay">
+              <span class="gallery-badge">Sports & Recreation</span>
+              <h5 class="gallery-title">Learners Playground</h5>
+              <p class="gallery-caption">Safe and vibrant space for children to refresh and play sports.</p>
+            </div>
+          </div>
+        </div>
+
+        <!-- Item 5: Graduation & Dedication -->
+        <div class="col-lg-4 col-md-6 gallery-item" data-category="events" data-aos="fade-up" data-aos-delay="100">
+          <div class="gallery-card tall" onclick="openLightbox('assets/img/40.jpg', 'School Dedication & Anniversary', 'Commemorating landmark growth and milestones')">
+            <img src="assets/img/40.jpg" alt="School Events">
+            <div class="zoom-icon-badge"><i class="fa-solid fa-expand"></i></div>
+            <div class="gallery-overlay">
+              <span class="gallery-badge">Events & Celebrations</span>
+              <h5 class="gallery-title">Anniversary & Ceremonies</h5>
+              <p class="gallery-caption">Celebrating excellence and divine blessings throughout our decade of impact.</p>
+            </div>
+          </div>
+        </div>
+
+        <!-- Item 6: Modern Classroom Facilities -->
+        <div class="col-lg-4 col-md-6 gallery-item" data-category="campus" data-aos="fade-up" data-aos-delay="200">
+          <div class="gallery-card" onclick="openLightbox('assets/img/5.jpg', 'Child-Friendly Classrooms', 'Comfortable furniture and CCTV monitored learning rooms')">
+            <img src="assets/img/5.jpg" alt="Classroom">
+            <div class="zoom-icon-badge"><i class="fa-solid fa-expand"></i></div>
+            <div class="gallery-overlay">
+              <span class="gallery-badge">Campus & Facilities</span>
+              <h5 class="gallery-title">Smart Learning Spaces</h5>
+              <p class="gallery-caption">Powered 24/7 by solar electricity and monitored by CCTV cameras.</p>
+            </div>
+          </div>
+        </div>
+        <div class="col-lg-4 col-md-6 gallery-item" data-category="sports" data-aos="fade-up" data-aos-delay="200">
+          <div class="gallery-card" onclick="openLightbox('assets/img/10.jpg', 'SPORT', 'Fully equipped Sport Materials.')">
+            <img src="assets/img/10.jpg" alt="Science Lab">
+            <div class="zoom-icon-badge"><i class="fa-solid fa-expand"></i></div>
+            <div class="gallery-overlay">
+              <span class="gallery-badge">Academics & Labs</span>
+              <h5 class="gallery-title">SPORTs</h5>
+              <p class="gallery-caption">Fully equipped Sport Materials.</p>
+            </div>
+          </div>
+        </div>
+         <!-- Item 7 : Graduation & Dedication -->
+        <div class="col-lg-4 col-md-6 gallery-item" data-category="events" data-aos="fade-up" data-aos-delay="100">
+          <div class="gallery-card tall" onclick="openLightbox('assets/img/yam.jpeg', 'School Dedication & Anniversary', 'NIGERIA @66')">
+            <img src="assets/img/yam.jpeg" alt="School Events">
+            <div class="zoom-icon-badge"><i class="fa-solid fa-expand"></i></div>
+            <div class="gallery-overlay">
+              <span class="gallery-badge">Events & Celebrations</span>
+              <h5 class="gallery-title">Nigeria @66</h5>
+              <p class="gallery-caption">Celebrating excellence and the Nation.</p>
+            </div>
+          </div>
+        </div>
+         <!-- Item 8: Graduation & Dedication -->
+        <div class="col-lg-4 col-md-6 gallery-item" data-category="events" data-aos="fade-up" data-aos-delay="100">
+          <div class="gallery-card tall" onclick="openLightbox('assets/img/39.jpg', 'School Dedication & Anniversary', 'Commemorating landmark growth and milestones')">
+            <img src="assets/img/39.jpg" alt="School Events">
+            <div class="zoom-icon-badge"><i class="fa-solid fa-expand"></i></div>
+            <div class="gallery-overlay">
+              <span class="gallery-badge">Events & Celebrations</span>
+              <h5 class="gallery-title">Anniversary & Ceremonies</h5>
+              <p class="gallery-caption">Celebrating excellence and divine blessings throughout our decade of impact.</p>
+            </div>
+          </div>
+        </div>
+         <!-- Item 5: Graduation & Dedication -->
+        <div class="col-lg-4 col-md-6 gallery-item" data-category="events" data-aos="fade-up" data-aos-delay="100">
+          <div class="gallery-card tall" onclick="openLightbox('assets/img/31.jpg', 'School Dedication & Anniversary', 'Commemorating landmark growth and milestones')">
+            <img src="assets/img/31.jpg" alt="School Events">
+            <div class="zoom-icon-badge"><i class="fa-solid fa-expand"></i></div>
+            <div class="gallery-overlay">
+              <span class="gallery-badge">Events & Celebrations</span>
+              <h5 class="gallery-title">Anniversary & Ceremonies</h5>
+              <p class="gallery-caption">Celebrating excellence and divine blessings throughout our decade of impact.</p>
+            </div>
+          </div>
+        </div>
+
+         <!-- Item 5: Graduation & Dedication -->
+        <div class="col-lg-4 col-md-6 gallery-item" data-category="academics" data-aos="fade-up" data-aos-delay="100">
+          <div class="gallery-card tall" onclick="openLightbox('assets/img/17.jpg', 'music', 'Fully equipped Musical Instrument')">
+            <img src="assets/img/17.jpg" alt="School Events">
+            <div class="zoom-icon-badge"><i class="fa-solid fa-expand"></i></div>
+            <div class="gallery-overlay">
+              <span class="gallery-badge">Academics & Labs</span>
+              <h5 class="gallery-title">MUSIC</h5>
+              <p class="gallery-caption">Fully equipped Musical Instrument </p>
+            </div>
+          </div>
+        </div>
+
+        <div class="col-lg-4 col-md-6 gallery-item" data-category="academics" data-aos="fade-up" data-aos-delay="200">
+          <div class="gallery-card" onclick="openLightbox('assets/img/10.jpg', 'SPORT', 'Fully equipped Sport Materials.')">
+            <img src="assets/img/10.jpg" alt="Science Lab">
+            <div class="zoom-icon-badge"><i class="fa-solid fa-expand"></i></div>
+            <div class="gallery-overlay">
+              <span class="gallery-badge">Academics & Labs</span>
+              <h5 class="gallery-title">SPORTs</h5>
+              <p class="gallery-caption">Fully equipped Sport Materials.</p>
+            </div>
+          </div>
+        </div>
+         <!-- Item 6: Modern Classroom Facilities -->
+        <div class="col-lg-4 col-md-6 gallery-item" data-category="campus" data-aos="fade-up" data-aos-delay="200">
+          <div class="gallery-card" onclick="openLightbox('assets/img/15.jpg', 'EVENT', 'Comfortable furniture and CCTV monitored learning rooms')">
+            <img src="assets/img/15.jpg" alt="Classroom">
+            <div class="zoom-icon-badge"><i class="fa-solid fa-expand"></i></div>
+            <div class="gallery-overlay">
+              <span class="gallery-badge">EVENTS</span>
+              <h5 class="gallery-title">March pass</h5>
+              <p class="gallery-caption"></p>
+            </div>
+          </div>
+        </div>
+
+         <!-- Item 6: Modern Classroom Facilities -->
+        <div class="col-lg-4 col-md-6 gallery-item" data-category="campus" data-aos="fade-up" data-aos-delay="200">
+          <div class="gallery-card" onclick="openLightbox('assets/img/8.jpg', 'Child-Friendly Classrooms', 'Comfortable furniture and CCTV monitored learning rooms')">
+            <img src="assets/img/8.jpg" alt="Classroom">
+            <div class="zoom-icon-badge"><i class="fa-solid fa-expand"></i></div>
+            <div class="gallery-overlay">
+              <span class="gallery-badge">Campus & Facilities</span>
+              <h5 class="gallery-title">Smart Learning Spaces</h5>
+              <p class="gallery-caption">Powered 24/7 by solar electricity and monitored by CCTV cameras.</p>
+            </div>
+          </div>
+        </div>
+
+        <!-- Item 3: Science Labs -->
+        <div class="col-lg-4 col-md-6 gallery-item" data-category="academics" data-aos="fade-up" data-aos-delay="200">
+          <div class="gallery-card" onclick="openLightbox('assets/img/6.jpg', 'Science Laboratories', 'WAEC & NECO accredited Physics, Chemistry, and Biology labs')">
+            <img src="assets/img/6.jpg" alt="Science Lab">
+            <div class="zoom-icon-badge"><i class="fa-solid fa-expand"></i></div>
+            <div class="gallery-overlay">
+              <span class="gallery-badge">Academics & Labs</span>
+              <h5 class="gallery-title">Science Laboratories</h5>
+              <p class="gallery-caption">Fully equipped laboratories for practical Physics, Chemistry, and Biology.</p>
+            </div>
+          </div>
+        </div>
+
+        <!-- Item 3: Science Labs -->
+        <div class="col-lg-4 col-md-6 gallery-item" data-category="academics" data-aos="fade-up" data-aos-delay="200">
+          <div class="gallery-card" onclick="openLightbox('assets/img/7.jpg', 'Science Laboratories', 'WAEC & NECO accredited Physics, Chemistry, and Biology labs')">
+            <img src="assets/img/7.jpg" alt="Science Lab">
+            <div class="zoom-icon-badge"><i class="fa-solid fa-expand"></i></div>
+            <div class="gallery-overlay">
+              <span class="gallery-badge">Academics & Labs</span>
+              <h5 class="gallery-title">Science Laboratories</h5>
+              <p class="gallery-caption">Fully equipped laboratories for practical Physics, Chemistry, and Biology.</p>
+            </div>
+          </div>
+        </div>
+
+        <!-- Item 3: Science Labs -->
+        <div class="col-lg-4 col-md-6 gallery-item" data-category="events" data-aos="fade-up" data-aos-delay="200">
+          <div class="gallery-card" onclick="openLightbox('assets/img/25.jpg', 'EVENT', 'WAEC & NECO accredited Physics, Chemistry, and Biology labs')">
+            <img src="assets/img/25.jpg" alt="Science Lab">
+            <div class="zoom-icon-badge"><i class="fa-solid fa-expand"></i></div>
+            <div class="gallery-overlay">
+              <span class="gallery-badge">EVENTS</span>
+              <h5 class="gallery-title">SCHOOL ACTIVITIES</h5>
+              <p class="gallery-caption"></p>
+            </div>
+          </div>
+        </div>
+
+        <!-- Item 1: Secondary School Building -->
+        <div class="col-lg-4 col-md-6 gallery-item" data-category="sports" data-aos="fade-up">
+          <div class="gallery-card tall" onclick="openLightbox('assets/img/24.jpg', 'CAREER Day', 'EVENTS')">
+            <img src="assets/img/24.jpg" alt="Secondary School Building">
+            <div class="zoom-icon-badge"><i class="fa-solid fa-expand"></i></div>
+            <div class="gallery-overlay">
+              <span class="gallery-badge">CAREER DAY</span>
+              <h5 class="gallery-title">CHILDREN COSTUME</h5>
+              <p class="gallery-caption">EVENT.</p>
+            </div>
+          </div>
+        </div>
+
+        <!-- Item 1: Secondary School Building -->
+        <div class="col-lg-4 col-md-6 gallery-item" data-category="events" data-aos="fade-up">
+          <div class="gallery-card tall" onclick="openLightbox('assets/img/27.jpg', 'CULTURAL DAY', '')">
+            <img src="assets/img/27.jpg" alt="Secondary School Building">
+            <div class="zoom-icon-badge"><i class="fa-solid fa-expand"></i></div>
+            <div class="gallery-overlay">
+              <span class="gallery-badge">EVENTS</span>
+              <h5 class="gallery-title">CULTURAL DAY</h5>
+              <p class="gallery-caption"></p>
+            </div>
+          </div>
+        </div>
+
+        <!-- Item 6: Modern Classroom Facilities -->
+        <div class="col-lg-4 col-md-6 gallery-item" data-category="campus" data-aos="fade-up" data-aos-delay="200">
+          <div class="gallery-card" onclick="openLightbox('assets/img/37.jpg', 'EVENT', 'Comfortable furniture and CCTV monitored learning rooms')">
+            <img src="assets/img/37.jpg" alt="Classroom">
+            <div class="zoom-icon-badge"><i class="fa-solid fa-expand"></i></div>
+            <div class="gallery-overlay">
+              <span class="gallery-badge">PLAY CLASS</span>
+              <h5 class="gallery-title">CLASSROOM</h5>
+              <p class="gallery-caption"></p>
+            </div>
+          </div>
+        </div>
+
+        <!-- Item 1: Secondary School Building -->
+        <div class="col-lg-4 col-md-6 gallery-item" data-category="campus" data-aos="fade-up">
+          <div class="gallery-card tall" onclick="openLightbox('assets/img/52.jpg', 'CULTURAL DAY', '')">
+            <img src="assets/img/52.jpg" alt="Secondary School Building">
+            <div class="zoom-icon-badge"><i class="fa-solid fa-expand"></i></div>
+            <div class="gallery-overlay">
+              <span class="gallery-badge">PUPILS</span>
+              <h5 class="gallery-title">-</h5>
+              <p class="gallery-caption"></p>
+            </div>
+          </div>
+        </div>
+
+        <!-- Item 6: Modern Classroom Facilities -->
+        <div class="col-lg-4 col-md-6 gallery-item" data-category="campus" data-aos="fade-up" data-aos-delay="200">
+          <div class="gallery-card" onclick="openLightbox('assets/img/1.jpg', 'EVENT', 'Comfortable furniture and CCTV monitored learning rooms')">
+            <img src="assets/img/1.jpg" alt="Classroom">
+            <div class="zoom-icon-badge"><i class="fa-solid fa-expand"></i></div>
+            <div class="gallery-overlay">
+              <span class="gallery-badge">SCHOOL BULIDING</span>
+              <h5 class="gallery-title">-</h5>
+              <p class="gallery-caption"></p>
+            </div>
+          </div>
+        </div>
+
+        <!-- Item 6: Modern Classroom Facilities -->
+        <div class="col-lg-4 col-md-6 gallery-item" data-category="campus" data-aos="fade-up" data-aos-delay="200">
+          <div class="gallery-card" onclick="openLightbox('assets/img/pic3.jpg', 'students', 'Comfortable furniture and CCTV monitored learning rooms')">
+            <img src="assets/img/pic3.jpg" alt="Classroom">
+            <div class="zoom-icon-badge"><i class="fa-solid fa-expand"></i></div>
+            <div class="gallery-overlay">
+              <span class="gallery-badge">STUDENT</span>
+              <h5 class="gallery-title">-</h5>
+              <p class="gallery-caption"></p>
+            </div>
+          </div>
+        </div>
+
+        <!-- Item 6: Modern Classroom Facilities -->
+        <div class="col-lg-4 col-md-6 gallery-item" data-category="campus" data-aos="fade-up" data-aos-delay="200">
+          <div class="gallery-card" onclick="openLightbox('assets/img/56.jpg', 'ENVIRONMENT', 'Comfortable furniture and CCTV monitored learning rooms')">
+            <img src="assets/img/56.jpg" alt="Classroom">
+            <div class="zoom-icon-badge"><i class="fa-solid fa-expand"></i></div>
+            <div class="gallery-overlay">
+              <span class="gallery-badge">SCHOOL BULIDING</span>
+              <h5 class="gallery-title">-</h5>
+              <p class="gallery-caption"></p>
+            </div>
+          </div>
+        </div>
+
+         <!-- Item 1: Secondary School Building -->
+        <div class="col-lg-4 col-md-6 gallery-item" data-category="events" data-aos="fade-up">
+          <div class="gallery-card tall" onclick="openLightbox('assets/img/ggh.jpeg', 'Celebrating Nigeria at 66: Cultivating the Leaders of Tomorrow! 🦅', '')">
+            <img src="assets/img/ggh.jpeg" alt="Secondary School Building">
+            <div class="zoom-icon-badge"><i class="fa-solid fa-expand"></i></div>
+            <div class="gallery-overlay">
+              <span class="gallery-badge">EVENTS</span>
+              <h5 class="gallery-title">Raising Future Giants for a Greater Nigeria.” 💚🤍💚</h5>
+              <p class="gallery-caption">At Eagles Academy, we believe that true nation-building starts in the classroom.</p>
+            </div>
+          </div>
+        </div>
+
+        <!-- Item 1: Secondary School Building -->
+        <div class="col-lg-4 col-md-6 gallery-item" data-category="events" data-aos="fade-up">
+          <div class="gallery-card tall" onclick="openLightbox('assets/img/1113.jpg', 'Where Leaders Grow: A Tour of Our Safe & Inspiring Campus', '')">
+            <img src="assets/img/1113.jpg" alt="Secondary School Building">
+            <div class="zoom-icon-badge"><i class="fa-solid fa-expand"></i></div>
+            <div class="gallery-overlay">
+              <span class="gallery-badge">EVENTS</span>
+              <h5 class="gallery-title">Take a step inside Eagles Academy, Aso Pada! From our well-ventilated, serene classrooms and modern learning spaces to our vibrant play fields, we provide a safe, structured, and conducive environment designed to spark curiosity and nurture your child's full potential. 🌟</h5>
+              <p class="gallery-caption">At Eagles Academy, we believe that true nation-building starts in the classroom.</p>
+            </div>
+          </div>
+        </div>
+
+        <!-- Item 1: Secondary School Building -->
+        <div class="col-lg-4 col-md-6 gallery-item" data-category="sports" data-aos="fade-up">
+          <div class="gallery-card tall" onclick="openLightbox('assets/img/19.jpg', ' 🦅', '')">
+            <img src="assets/img/19.jpg" alt="Secondary School Building">
+            <div class="zoom-icon-badge"><i class="fa-solid fa-expand"></i></div>
+            <div class="gallery-overlay">
+              <span class="gallery-badge">EVENTS</span>
+              <h5 class="gallery-title">💚🤍💚</h5>
+              <p class="gallery-caption">At Eagles Academy, we believe that true nation-building starts in the classroom.</p>
+            </div>
+          </div>
+        </div>
+
+
+
+
+
+      </div>
+    </div>
+  </section>
+
+  <!-- Lightbox Modal -->
+  <div class="modal fade" id="lightboxModal" tabindex="-1" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered modal-lg">
+      <div class="modal-content">
+        <div class="lightbox-img-wrapper">
+          <button type="button" class="btn-close btn-close-white position-absolute top-0 end-0 m-3 z-3" data-bs-dismiss="modal" aria-label="Close"></button>
+          <img id="lightboxImage" src="" alt="Gallery Preview">
+          <div class="lightbox-caption-box">
+            <h5 id="lightboxTitle" class="fw-bold text-success mb-1"></h5>
+            <p id="lightboxDescription" class="text-muted small mb-0"></p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Footer -->
+  <footer>
+    <div class="container">
+      <div class="row g-4 mb-4">
+        <div class="col-lg-4">
+          <h5 class="text-white">Eagles Academy Aso Pada</h5>
+          <p>No. 42, Eagles Academy Road, Aso Pada, Mararaba, Nasarawa State, Nigeria.</p>
+          <p class="mb-1"><i class="fa-solid fa-phone me-2"></i> +234 807 616 6900</p>
+          <p><i class="fa-solid fa-envelope me-2"></i> eaglesacademy1@gmail.com</p>
+        </div>
+        <div class="col-lg-2">
+          <h5 class="text-white">Quick Links</h5>
+          <ul class="list-unstyled">
+            <li class="mb-2"><a href="index.html">Home</a></li>
+            <li class="mb-2"><a href="about.html">About Us</a></li>
+            <li class="mb-2"><a href="student-activities.html">Student Activities</a></li>
+            <li class="mb-2"><a href="gallery.html">Gallery</a></li>
+          </ul>
+        </div>
+        <div class="col-lg-6 text-lg-end">
+          <h5 class="text-white">School Motto</h5>
+          <p class="fst-italic text-warning fs-4 fw-bold">"Raising Future Giants"</p>
+        </div>
+      </div>
+      <hr class="border-secondary">
+      <div class="text-center pt-2">
+        <p class="mb-0">&copy; All Rights Reserved. Eagles Academy Aso Pada.</p>
+      </div>
+    </div>
+  </footer>
+
+  <!-- Scripts -->
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
+  <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
+  <script>
+    document.addEventListener('DOMContentLoaded', function () {
+      AOS.init({ duration: 900, once: true });
+
+      // Navbar Scroll Styling
+      const navbar = document.getElementById('mainNavbar');
+      window.addEventListener('scroll', function () {
+        if (window.scrollY > 50) {
+          navbar.classList.add('scrolled');
+        } else {
+          navbar.classList.remove('scrolled');
+        }
+      });
+
+      // Filter Functionality
+      const filterButtons = document.querySelectorAll('.gallery-filter-btn');
+      const galleryItems = document.querySelectorAll('.gallery-item');
+
+      filterButtons.forEach(button => {
+        button.addEventListener('click', function () {
+          filterButtons.forEach(btn => btn.classList.remove('active'));
+          this.classList.add('active');
+
+          const filterValue = this.getAttribute('data-filter');
+
+          galleryItems.forEach(item => {
+            if (filterValue === 'all' || item.getAttribute('data-category') === filterValue) {
+              item.style.display = 'block';
+              setTimeout(() => {
+                item.style.opacity = '1';
+                item.style.transform = 'scale(1)';
+              }, 50);
+            } else {
+              item.style.opacity = '0';
+              item.style.transform = 'scale(0.8)';
+              setTimeout(() => {
+                item.style.display = 'none';
+              }, 300);
+            }
+          });
+        });
+      });
+    });
+
+    // Lightbox Function
+    function openLightbox(imageSrc, title, description) {
+      document.getElementById('lightboxImage').src = imageSrc;
+      document.getElementById('lightboxTitle').textContent = title;
+      document.getElementById('lightboxDescription').textContent = description;
+      
+      const modal = new bootstrap.Modal(document.getElementById('lightboxModal'));
+      modal.show();
+    }
+  </script>
+</body>
+</html>
